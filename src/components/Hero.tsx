@@ -1,6 +1,6 @@
 function Hero() {
   return (
-    <div className="py-5 my-0 text-body-emphasis" id="hero-section">
+    <div className="py-5 my-0 text-body-emphasis text-center" id="hero-section">
       <h1 className="display-5 fw-bold text-body-emphasis">
         Spune adio problemelor mașinii tale.
       </h1>

@@ -14,17 +14,21 @@ body {
 }
 
 #hero-section{
-    background-color: #b5ffd3;
+    background: rgb(0,255,171);
+    background: linear-gradient(55deg, rgb(186, 243, 221) 0%, rgba(54, 224, 199, 0.77) 51%, rgba(0,212,255,0.0760504885547969) 100%), url("../public/assets/herobg.png");
+    background-size: 300ex;
     padding: 5em;
     filter: drop-shadow(0.5rem 0.15rem 20px #676767);
 }
 
 #hero-section h1{
-    max-width: 60%;
+    max-width: 100%;
     font-size: 5em;
 }
 
 #hero-section p{
-    max-width: 50%;
+    max-width: 100%;
     font-size: 1.5em;
+    padding-left: 20%;
+    padding-right: 20%;
 }
