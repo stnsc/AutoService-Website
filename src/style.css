@@ -1,0 +1,30 @@
+:root{
+    --bs-body-font-family: 'Urbanist', sans-serif;
+}
+
+html {
+    height: calc(100vh - 84px);
+    margin-top: 84px;
+    overflow: hidden;
+}
+
+body {
+    height: 100%;
+    overflow-y: auto;
+}
+
+#hero-section{
+    background-color: #b5ffd3;
+    padding: 5em;
+    filter: drop-shadow(0.5rem 0.15rem 20px #676767);
+}
+
+#hero-section h1{
+    max-width: 60%;
+    font-size: 5em;
+}
+
+#hero-section p{
+    max-width: 50%;
+    font-size: 1.5em;
+}
