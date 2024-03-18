@@ -32,3 +32,17 @@ body {
     padding-left: 20%;
     padding-right: 20%;
 }
+
+.row{
+    padding: 5em 10em;
+}
+
+.stats-container{
+    background: linear-gradient(55deg, rgba(9, 105, 108, 0.63) 0%, rgba(122, 224, 209, 0.77) 51%, rgb(116, 229, 178) 100%);
+    filter: drop-shadow(0.5rem 0.15rem 20px #676767);
+    font-size: 30px;
+}
+
+.jumbotron{
+    padding: 5em;
+}
