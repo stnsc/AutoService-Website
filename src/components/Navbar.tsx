@@ -11,7 +11,19 @@ function Navbar() {
           </a>
 
           <a href="#" className="nav-link px-2 me-1">
-            Alta pagina
+            Servicii
+          </a>
+
+          <a href="#" className="nav-link px-2 me-1">
+            Locatii
+          </a>
+
+          <a href="#" className="nav-link px-2 me-1">
+            Contact
+          </a>
+
+          <a href="#" className="nav-link px-2 me-1">
+            Login
           </a>
         </div>
       </div>
