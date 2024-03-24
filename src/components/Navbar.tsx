@@ -1,4 +1,6 @@
-function Navbar() {
+import { Link } from "react-router-dom";
+
+export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-sm bg-body-tertiary fixed-top">
       <div className="container-fluid">
@@ -6,29 +8,27 @@ function Navbar() {
           <img src="../../public/assets/logo.png" alt="Bootstrap" height="60" />
         </a>
         <div className="navbar me-auto p-2" id="navbarNav">
-          <a href="#" className="nav-link px-2 active">
+          <Link to="/" className="nav-link px-2 me-1">
             Acasa
-          </a>
+          </Link>
 
-          <a href="#" className="nav-link px-2 me-1">
+          <Link to="/servicii" className="nav-link px-2 me-1">
             Servicii
-          </a>
+          </Link>
 
-          <a href="#" className="nav-link px-2 me-1">
+          <Link to="/locatii" className="nav-link px-2 me-1">
             Locatii
-          </a>
+          </Link>
 
-          <a href="#" className="nav-link px-2 me-1">
+          <Link to="/contact" className="nav-link px-2 me-1">
             Contact
-          </a>
+          </Link>
 
-          <a href="#" className="nav-link px-2 me-1">
+          <Link to="/login" className="nav-link px-2 me-1">
             Login
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
   );
 }
-
-export default Navbar;

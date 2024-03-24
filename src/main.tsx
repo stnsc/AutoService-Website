@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Home from "./pages/Home.tsx";
 import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Home />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 );
