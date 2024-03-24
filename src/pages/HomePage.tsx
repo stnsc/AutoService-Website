@@ -1,8 +1,15 @@
 import HeroTitle from "../components/HeroTitle.tsx";
 
-export default function Home() {
+import { motion } from "framer-motion";
+
+export default function HomePage() {
   return (
-    <>
+    <motion.div
+      className="home"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       {/* HERO COMPONENT */}
 
       <HeroTitle
@@ -113,7 +120,7 @@ export default function Home() {
           </a>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 }
 

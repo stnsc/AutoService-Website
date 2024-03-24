@@ -1,29 +1,43 @@
-import Home from "./pages/Home.tsx";
-
-import { Route, Routes } from "react-router";
-import Servicii from "./pages/Servicii.tsx";
-import Navbar from "./components/Navbar.tsx";
-import Footer from "./components/Footer.tsx";
-import Locatii from "./pages/Locatii.tsx";
-import Login from "./pages/Login.tsx";
-import Contact from "./pages/Contact.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import * as React from "react";
+import { useLocation, useRoutes } from "react-router";
+import HomePage from "./pages/HomePage.tsx";
+import ServiciiPage from "./pages/ServiciiPage.tsx";
+import LocatiiPage from "./pages/LocatiiPage.tsx";
+import ContactPage from "./pages/ContactPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import { AnimatePresence } from "framer-motion";
 
 export default function App() {
+  const element = useRoutes([
+    {
+      path: "/",
+      element: <HomePage />,
+    },
+    {
+      path: "/servicii",
+      element: <ServiciiPage />,
+    },
+    {
+      path: "/locatii",
+      element: <LocatiiPage />,
+    },
+    {
+      path: "/contact",
+      element: <ContactPage />,
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
+    },
+  ]);
+
+  const location = useLocation();
+
+  if (!element) return null;
+
   return (
-    <>
-      <Navbar />
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/servicii" element={<Servicii />}></Route>
-          <Route path="/locatii" element={<Locatii />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </div>
-      <Footer />
-    </>
+    <AnimatePresence mode="wait">
+      {React.cloneElement(element, { key: location.pathname })};
+    </AnimatePresence>
   );
 }
