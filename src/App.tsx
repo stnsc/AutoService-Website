@@ -7,6 +7,7 @@ import Footer from "./components/Footer.tsx";
 import Locatii from "./pages/Locatii.tsx";
 import Login from "./pages/Login.tsx";
 import Contact from "./pages/Contact.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/locatii" element={<Locatii />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
       <Footer />

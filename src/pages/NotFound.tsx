@@ -6,7 +6,7 @@ export default function NotFound() {
     <>
       <div>
         <HeroTitle title={"404"} description={"Pagina nu a fost gasita"} />
-        <Link to="/" className="btn">
+        <Link to="/" className="btn btn-primary">
           Inapoi acasa
         </Link>
       </div>
