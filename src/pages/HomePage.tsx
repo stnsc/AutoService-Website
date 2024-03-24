@@ -1,15 +1,12 @@
 import HeroTitle from "../components/HeroTitle.tsx";
 
-import { motion } from "framer-motion";
+import { motion, useIsPresent } from "framer-motion";
 
 export default function HomePage() {
+  const isPresent = useIsPresent();
+
   return (
-    <motion.div
-      className="home"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <>
       {/* HERO COMPONENT */}
 
       <HeroTitle
@@ -120,7 +117,14 @@ export default function HomePage() {
           </a>
         </div>
       </div>
-    </motion.div>
+      <motion.div
+        className="screen-wipe"
+        initial={{ scaleX: 1 }}
+        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
+        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+        style={{ originX: isPresent ? 0 : 1 }}
+      />
+    </>
   );
 }
 

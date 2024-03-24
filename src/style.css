@@ -55,3 +55,13 @@ body {
     margin: 2em;
     filter: drop-shadow(0rem 0.15rem 10px #afafaf);
 }
+
+.screen-wipe{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #7de4d4;
+    z-index: 2;
+}

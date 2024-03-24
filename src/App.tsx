@@ -36,7 +36,7 @@ export default function App() {
   if (!element) return null;
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       {React.cloneElement(element, { key: location.pathname })};
     </AnimatePresence>
   );

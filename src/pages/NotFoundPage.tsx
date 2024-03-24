@@ -1,21 +1,24 @@
 import { Link } from "react-router-dom";
 import HeroTitle from "../components/HeroTitle.tsx";
-import { motion } from "framer-motion";
+import { motion, useIsPresent } from "framer-motion";
 
 export default function NotFoundPage() {
+  const isPresent = useIsPresent();
+
   return (
     <>
+      <HeroTitle title={"404"} description={"Pagina nu a fost gasita"} />
+      <Link to="/" className="btn btn-primary">
+        Inapoi acasa
+      </Link>
+
       <motion.div
-        className="notFound"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <HeroTitle title={"404"} description={"Pagina nu a fost gasita"} />
-        <Link to="/" className="btn btn-primary">
-          Inapoi acasa
-        </Link>
-      </motion.div>
+        className="screen-wipe"
+        initial={{ scaleX: 1 }}
+        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
+        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+        style={{ originX: isPresent ? 0 : 1 }}
+      />
     </>
   );
 }
