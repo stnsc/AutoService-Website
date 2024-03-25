@@ -1,6 +1,15 @@
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 
 export default function Navbar() {
+  function handleChange() {
+    const { checked: darkModeValue } = document.getElementById(
+      "flexSwitchCheckDefault",
+    );
+
+    if (darkModeValue) console.log("Dark Mode Activated!");
+    else console.log("Dark Mode Off");
+  }
+
   return (
     <nav className="navbar navbar-expand-sm bg-body-tertiary fixed-top">
       <div className="container-fluid">
@@ -29,6 +38,24 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+      <form
+        method="post"
+        className="form-check form-switch me-2"
+        onChange={handleChange}
+      >
+        <input
+          className="form-check-input dark-mode-toggle"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault"
+        />
+        <label
+          className="form-check-label dark-mode-label"
+          htmlFor="flexSwitchCheckDefault"
+        >
+          Dark Mode
+        </label>
+      </form>
     </nav>
   );
 }
