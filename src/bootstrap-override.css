@@ -1,0 +1,148 @@
+
+/*------------------------------------
+- COLOR primary
+------------------------------------*/
+.alert-primary {
+    color: #0f3d2d;
+    background-color: #aae9d3;
+    border-color: #9ae5cb;
+}
+
+.alert-primary hr {
+    border-top-color: #86dfc0;
+}
+
+.alert-primary .alert-link {
+    color: #05150f;
+}
+
+.badge-primary {
+    color: #fff;
+    background-color: #299f76;
+}
+
+.badge-primary[href]:hover, .badge-primary[href]:focus {
+    color: #fff;
+    background-color: #1e7657;
+}
+
+.bg-primary {
+    background-color: #299f76 !important;
+}
+
+a.bg-primary:hover, a.bg-primary:focus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+    background-color: #1e7657 !important;
+}
+
+.border-primary {
+    border-color: #299f76 !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #299f76;
+    border-color: #299f76;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #218260;
+    border-color: #1e7657;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(41, 159, 118, 0.5);
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #299f76;
+    border-color: #299f76;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #1e7657;
+    border-color: #1b6a4e;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(41, 159, 118, 0.5);
+}
+
+.btn-outline-primary {
+    color: #299f76;
+    background-color: transparent;
+    border-color: #299f76;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #299f76;
+    border-color: #299f76;
+}
+
+.btn-outline-primary:focus, .btn-outline-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(41, 159, 118, 0.5);
+}
+
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    color: #299f76;
+    background-color: transparent;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #299f76;
+    border-color: #299f76;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(41, 159, 118, 0.5);
+}
+
+.list-group-item-primary {
+    color: #0f3d2d;
+    background-color: #9ae5cb;
+}
+
+.list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {
+    color: #0f3d2d;
+    background-color: #86dfc0;
+}
+
+.list-group-item-primary.list-group-item-action.active {
+    color: #fff;
+    background-color: #0f3d2d;
+    border-color: #0f3d2d;
+}
+
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+    background-color: #9ae5cb;
+}
+
+.table-hover .table-primary:hover {
+    background-color: #86dfc0;
+}
+
+.table-hover .table-primary:hover > td,
+.table-hover .table-primary:hover > th {
+    background-color: #86dfc0;
+}
+
+.text-primary {
+    color: #299f76 !important;
+}
+
+a.text-primary:hover, a.text-primary:focus {
+    color: #1e7657 !important;
+}
+
+.form-check-input:checked {
+    background-color: #299f76;
+    border-color: #32886d;
+}
