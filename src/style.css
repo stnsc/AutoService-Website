@@ -65,7 +65,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #7de4d4;
+    background-color: rgba(130, 230, 213, 0.55);
+    backdrop-filter: blur(1rem);
     z-index: 2;
 }
 

@@ -1,13 +1,21 @@
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function Navbar() {
+  //const [cookies, setCookie] = useCookies("dark-mode");
+
   function handleChange() {
-    const { checked: darkModeValue } = document.getElementById(
+    let { checked: darkModeValue } = document.getElementById(
       "flexSwitchCheckDefault",
     );
 
-    if (darkModeValue) console.log("Dark Mode Activated!");
-    else console.log("Dark Mode Off");
+    if (darkModeValue) {
+      document.documentElement.setAttribute("data-bs-theme", "dark");
+      //setCookie("dark-mode", true);
+    } else {
+      document.documentElement.setAttribute("data-bs-theme", "light");
+      //setCookie("dark-mode", false);
+    }
   }
 
   return (
