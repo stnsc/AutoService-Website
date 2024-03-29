@@ -19,7 +19,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="navbar navbar-expand-sm bg-body-tertiary fixed-top">
+    <nav className="navbar navbar-expand-sm fixed-top">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           <img src="../../public/assets/logo.png" alt="Bootstrap" height="60" />

@@ -79,3 +79,8 @@ body {
 .dark-mode-label{
     display: flex;
 }
+
+.navbar{
+    opacity: 0.9 !important;
+    backdrop-filter: blur(1rem) !important;
+}
