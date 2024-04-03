@@ -1,12 +1,14 @@
 import { motion, useIsPresent } from "framer-motion";
-import HeroTitle from "../components/HeroTitle.tsx";
+import LoginBackground from "../components/login/LoginBackground.tsx";
+import LoginContainer from "../components/login/LoginContainer.tsx";
 
 export default function LoginPage() {
   const isPresent = useIsPresent();
 
   return (
     <>
-      <HeroTitle title={"Login"} description={"Descriere Pagina Login"} />;
+      <LoginBackground />
+      <LoginContainer />
       <motion.div
         className="screen-wipe"
         initial={{ scaleX: 1 }}

@@ -1,23 +1,6 @@
 import { Link } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 export default function Navbar() {
-  //const [cookies, setCookie] = useCookies("dark-mode");
-
-  function handleChange() {
-    let { checked: darkModeValue } = document.getElementById(
-      "flexSwitchCheckDefault",
-    );
-
-    if (darkModeValue) {
-      document.documentElement.setAttribute("data-bs-theme", "dark");
-      //setCookie("dark-mode", true);
-    } else {
-      document.documentElement.setAttribute("data-bs-theme", "light");
-      //setCookie("dark-mode", false);
-    }
-  }
-
   return (
     <nav className="navbar navbar-expand-sm fixed-top">
       <div className="container-fluid">
@@ -40,30 +23,13 @@ export default function Navbar() {
           <Link to="/contact" className="nav-link px-2 me-1">
             Contact
           </Link>
-
-          <Link to="/login" className="nav-link px-2 me-1">
+        </div>
+        <span>
+          <Link to="/login" className="nav-link px-4 me-2">
             Login
           </Link>
-        </div>
+        </span>
       </div>
-      <form
-        method="post"
-        className="form-check form-switch me-2"
-        onChange={handleChange}
-      >
-        <input
-          className="form-check-input dark-mode-toggle"
-          type="checkbox"
-          role="switch"
-          id="flexSwitchCheckDefault"
-        />
-        <label
-          className="form-check-label dark-mode-label"
-          htmlFor="flexSwitchCheckDefault"
-        >
-          Dark Mode
-        </label>
-      </form>
     </nav>
   );
 }
