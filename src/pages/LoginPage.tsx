@@ -1,5 +1,4 @@
 import { motion, useIsPresent } from "framer-motion";
-import LoginBackground from "../components/login/LoginBackground.tsx";
 import LoginContainer from "../components/login/LoginContainer.tsx";
 
 export default function LoginPage() {
@@ -7,7 +6,11 @@ export default function LoginPage() {
 
   return (
     <>
-      <LoginBackground />
+      <img
+        src="../../public/assets/bg.png"
+        alt="Login Background"
+        className="login-bg"
+      />
       <LoginContainer />
       <motion.div
         className="screen-wipe"
