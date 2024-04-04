@@ -6,6 +6,7 @@ import LocatiiPage from "./pages/LocatiiPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import { AnimatePresence } from "framer-motion";
+import DatabaseDebugPage from "./pages/DatabaseDebugPage.tsx";
 
 export default function App() {
   const element = useRoutes([
@@ -28,6 +29,10 @@ export default function App() {
     {
       path: "/login",
       element: <LoginPage />,
+    },
+    {
+      path: "/db",
+      element: <DatabaseDebugPage />,
     },
   ]);
 
