@@ -25,15 +25,13 @@ export default function LoginContainer() {
           <p className="auth-desc">Programeaza-te la atelierele noastre.</p>
         </div>
         <div className="form-signin login-input-container">
-          <form className="gap-login">
-            {stateType[state]}
-            <p className="white-label">
-              {extraActionStringLabel[state]}{" "}
-              <a href="#" className="link-info" onClick={handleChange}>
-                {extraActionStringLink[state]}
-              </a>
-            </p>
-          </form>
+          {stateType[state]}
+          <p className="white-label">
+            {extraActionStringLabel[state]}{" "}
+            <a href="#" className="link-info" onClick={handleChange}>
+              {extraActionStringLink[state]}
+            </a>
+          </p>
         </div>
       </div>
     </>

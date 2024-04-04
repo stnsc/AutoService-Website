@@ -1,6 +1,6 @@
 export default function Footer() {
   function handleChange() {
-    let { checked: darkModeValue } = document.getElementById(
+    const { checked: darkModeValue } = document.getElementById(
       "flexSwitchCheckDefault",
     );
 
@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <>
       <div className="card footer-container fixed-bottom rounded-5">
-        <div className="card-body text-center text-white bg-black rounded-5 d-flex align-items-center justify-content-between">
+        <div className="card-body text-center text-white rounded-5 d-flex align-items-center justify-content-between">
           <p className="card-text center m-0">
             Licență de{" "}
             <a href="https://github.com/stnsc" className="link-info">

@@ -22,7 +22,7 @@ export default function HomePage() {
         <div className="col-sm-4">
           <div className="card">
             <img
-              src="../../public/assets/placeholder.png"
+              src="../../assets/placeholder.png"
               className="card-img-top"
               alt="..."
             />
@@ -39,7 +39,7 @@ export default function HomePage() {
         <div className="col-sm-4">
           <div className="card">
             <img
-              src="../../public/assets/placeholder.png"
+              src="../../assets/placeholder.png"
               className="card-img-top"
               alt="..."
             />
@@ -56,7 +56,7 @@ export default function HomePage() {
         <div className="col-sm-4">
           <div className="card">
             <img
-              src="../../public/assets/placeholder.png"
+              src="../../assets/placeholder.png"
               className="card-img-top"
               alt="..."
             />

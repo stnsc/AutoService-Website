@@ -7,7 +7,7 @@ export default function LoginPage() {
   return (
     <>
       <img
-        src="../../public/assets/bg.png"
+        src="../../assets/bg.png"
         alt="Login Background"
         className="login-bg"
       />

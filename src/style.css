@@ -20,7 +20,7 @@ body {
 
 #hero-section{
     background: rgb(0,255,171);
-    background: linear-gradient(55deg, rgb(186, 243, 221) 0%, rgba(54, 224, 199, 0.77) 51%, rgba(0,212,255,0.0760504885547969) 100%), url("../public/assets/herobg.png");
+    background: linear-gradient(55deg, rgb(186, 243, 221) 0%, rgba(54, 224, 199, 0.77) 51%, rgba(0,212,255,0.0760504885547969) 100%), url("../assets/herobg.png");
     background-size: 300ex;
     padding: 5em;
     filter: drop-shadow(0.5rem 0.15rem 20px #676767);
@@ -54,11 +54,12 @@ body {
 }
 
 .footer-container{
-    margin-left: 40%;
-    margin-right: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
     margin-bottom: 1em;
-    filter: drop-shadow(0rem 0.15rem 10px #afafaf);
-    opacity: 0.5;
+    backdrop-filter: blur(2em);
+    filter: drop-shadow(0rem 0.15rem 5px #afafaf);
+    background: rgba(0,0,0,0.4);
 }
 
 .screen-wipe{
