@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 
 interface Props {
   variant: string;
-  heading: string;
   contents: string;
   show_bool: boolean;
 }
 
 export default function AlertComponent({
   variant,
-  heading,
   contents,
   show_bool,
 }: Props) {
@@ -24,7 +22,6 @@ export default function AlertComponent({
     return (
       <>
         <Alert variant={variant} onClose={() => setShow(false)} dismissible>
-          <Alert.Heading>{heading}</Alert.Heading>
           <p>{contents}</p>
         </Alert>
       </>

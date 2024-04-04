@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 
 export default function DatabaseDebugPage() {
-  const [users, setUsers] = useState("");
+  const [users, setUsers] = useState([]);
 
   function getUsers() {
-    fetch("http://localhost:3001")
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        setUsers(data);
-      });
+    fetch("http://localhost:3001/api/users")
+      .then((response) => response.json())
+      .then((result) => setUsers(result))
+      .catch((error) => console.error("Error fetching: " + error));
   }
 
   useEffect(() => {
@@ -19,7 +16,17 @@ export default function DatabaseDebugPage() {
 
   return (
     <>
-      <div>{users ? users : "Nu exista date disponibile."}</div>
+      <div className="row row-cols-3">
+        <h1>Baze de date utilizatori</h1>
+        {users.map(({ email, id, name }) => (
+          <div key={id} className="col">
+            <div className="bg-primary p-3 rounded">
+              <p>Nume: {name}</p>
+              <p>Email: {email}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </>
   );
 }

@@ -1,15 +1,19 @@
-import { SetStateAction, useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import AlertComponent from "../AlertComponent.tsx";
 
 export default function SignUpForm() {
   const [gender, setGender] = useState(0);
   const [show, setShow] = useState(false);
   const [err, setErr] = useState(0);
+  const [type, setType] = useState(0);
 
   const err_array = [
-    "Nu ai completat toate campurile",
+    "Campurile nu au fost completate corespunzator",
     "Parolele nu sunt indentice.",
+    "Cont creat!",
   ];
+
+  const alert_type = ["danger", "primary"];
 
   function handleGenderChange(e: {
     target: { value: SetStateAction<number> };
@@ -17,12 +21,13 @@ export default function SignUpForm() {
     setGender(e.target.value);
   }
 
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleInputChange() {
     setShow(false);
   }
 
   function createUser(e: { preventDefault: () => void; target: never }) {
     e.preventDefault();
+    setType(0);
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
@@ -33,8 +38,6 @@ export default function SignUpForm() {
     const password_verify: string = data.password_verify as string;
 
     //validation logic
-    console.log(name.length);
-
     if (!name.length || !email.length || !password || !password_verify) {
       setShow(true);
       setErr(0);
@@ -44,15 +47,19 @@ export default function SignUpForm() {
     if (password != password_verify) {
       setShow(true);
       setErr(1);
+      return;
     }
 
-    fetch("http://localhost:3001/create", {
+    fetch("http://localhost:3001/api/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, email, password, gender }),
     }).then((response) => {
+      setShow(true);
+      setType(1);
+      setErr(2);
       return response.text();
     });
   }
@@ -129,8 +136,7 @@ export default function SignUpForm() {
         </button>
 
         <AlertComponent
-          variant={"danger"}
-          heading={"Eroare"}
+          variant={alert_type[type]}
           contents={err_array[err]}
           show_bool={show}
         />

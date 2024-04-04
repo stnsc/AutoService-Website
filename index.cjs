@@ -4,6 +4,7 @@ const users_model = require("./pg/usersModel.cjs");
 
 const app = express();
 const port = 3001;
+const path = "/api";
 
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -18,7 +19,7 @@ app.use(function (req, res, next) {
 
 
 // get users
-app.get("/", (req, res) => {
+app.get(`${path}/users`, (req, res) => {
   users_model
     .getUsers()
     .then((response) => {
@@ -30,7 +31,7 @@ app.get("/", (req, res) => {
 });
 
 // create user
-app.post('/create', (req, res) => {
+app.post(`${path}/create`, (req, res) => {
   users_model.createUser(req.body)
     .then(response => {
       res.status(200).send(response);
