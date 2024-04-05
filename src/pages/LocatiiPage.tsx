@@ -8,6 +8,23 @@ export default function LocatiiPage() {
     <>
       <HeroTitle title={"Locatii"} description={"Descriere Pagina Locatii"} />
 
+      <div className="row row-cols-1">
+        {[...Array(10)].map((x, i) => (
+          <div className="col" key={i}>
+            <div className="bg-secondary p-3 rounded grid-location m-3">
+              <div className="location-image">
+                <img src="../../assets/placeholder.png" alt="Poza Locatie" />
+              </div>
+              <h1 className="location-name">Nume Locatie</h1>
+              <p className="location-desc">Descriere Locatie</p>
+              <button className="btn bg-primary">
+                Logheaza-te pentru a continua!
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <motion.div
         className="screen-wipe"
         initial={{ scaleX: 1 }}
