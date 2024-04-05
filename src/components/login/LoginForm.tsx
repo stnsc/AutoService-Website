@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AlertComponent from "../AlertComponent.tsx";
 
 export default function LoginForm() {
   const [users, setUsers] = useState([]);
-  const [show, setShow] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const [err, setErr] = useState(0);
   const [type, setType] = useState(0);
 
@@ -27,10 +27,13 @@ export default function LoginForm() {
   }, []);
 
   function handleInputChange() {
-    setShow(false);
+    setShowAlert(false);
   }
 
-  function handleLogin(e) {
+  function handleLogin(e: {
+    preventDefault: () => void;
+    target: HTMLFormElement | undefined;
+  }) {
     e.preventDefault();
     setType(0);
 
@@ -41,20 +44,19 @@ export default function LoginForm() {
     const password: string = data.password as string;
 
     if (!email.length || !password.length) {
-      setShow(true);
+      setShowAlert(true);
       setErr(0);
     }
 
     let userFound = false;
 
-    users.forEach((user) => {
-      //this is kinda dumb with the trim()'s, need to fix db data type issue
-      if (user.email === email && user.password.trim() === password.trim()) {
+    users.forEach(({ email: email1, password: password1 }) => {
+      if (email1 === email && password1 === password) {
         userFound = true;
       }
     });
 
-    setShow(true);
+    setShowAlert(true);
     if (!userFound) {
       setErr(1);
     } else {
@@ -96,11 +98,13 @@ export default function LoginForm() {
           Logare
         </button>
 
-        <AlertComponent
-          variant={alert_type[type]}
-          contents={err_array[err]}
-          show_bool={show}
-        />
+        {showAlert && (
+          <AlertComponent
+            variant={alert_type[type]}
+            contents={err_array[err]}
+            dismiss={() => setShowAlert(false)}
+          />
+        )}
       </form>
     </>
   );

@@ -1,9 +1,9 @@
-import React, { SetStateAction, useState } from "react";
+import { SetStateAction, useState } from "react";
 import AlertComponent from "../AlertComponent.tsx";
 
 export default function SignUpForm() {
   const [gender, setGender] = useState(0);
-  const [show, setShow] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const [err, setErr] = useState(0);
   const [type, setType] = useState(0);
 
@@ -22,7 +22,7 @@ export default function SignUpForm() {
   }
 
   function handleInputChange() {
-    setShow(false);
+    setShowAlert(false);
   }
 
   function createUser(e: { preventDefault: () => void; target: never }) {
@@ -39,13 +39,13 @@ export default function SignUpForm() {
 
     //validation logic
     if (!name.length || !email.length || !password || !password_verify) {
-      setShow(true);
+      setShowAlert(true);
       setErr(0);
       return;
     }
 
     if (password != password_verify) {
-      setShow(true);
+      setShowAlert(true);
       setErr(1);
       return;
     }
@@ -57,7 +57,7 @@ export default function SignUpForm() {
       },
       body: JSON.stringify({ name, email, password, gender }),
     }).then((response) => {
-      setShow(true);
+      setShowAlert(true);
       setType(1);
       setErr(2);
       return response.text();
@@ -135,11 +135,13 @@ export default function SignUpForm() {
           Inscriere!
         </button>
 
-        <AlertComponent
-          variant={alert_type[type]}
-          contents={err_array[err]}
-          show_bool={show}
-        />
+        {showAlert && (
+          <AlertComponent
+            variant={alert_type[type]}
+            contents={err_array[err]}
+            dismiss={() => setShowAlert(false)}
+          />
+        )}
       </form>
     </>
   );

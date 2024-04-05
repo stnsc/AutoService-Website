@@ -1,32 +1,17 @@
 import { Alert } from "react-bootstrap";
-import { useEffect, useState } from "react";
 
 interface Props {
   variant: string;
   contents: string;
-  show_bool: boolean;
+  dismiss: () => void;
 }
 
-export default function AlertComponent({
-  variant,
-  contents,
-  show_bool,
-}: Props) {
-  const [show, setShow] = useState(show_bool);
-
-  useEffect(() => {
-    setShow(show_bool);
-  }, [show_bool]);
-
-  if (show) {
-    return (
-      <>
-        <Alert variant={variant} onClose={() => setShow(false)} dismissible>
-          <p>{contents}</p>
-        </Alert>
-      </>
-    );
-  } else {
-    return null;
-  }
+export default function AlertComponent({ variant, contents, dismiss }: Props) {
+  return (
+    <>
+      <Alert variant={variant} onClose={dismiss} dismissible>
+        <p>{contents}</p>
+      </Alert>
+    </>
+  );
 }
