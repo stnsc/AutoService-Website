@@ -145,24 +145,46 @@ body {
     margin: 0;
 }
 
-.location-container{
-    justify-content: center;
-
-    .location-div{
-        background: gray;
-        width: 90%;
+.location-card{
+    background: rgba(54, 224, 199, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 2em;
+    .location-body{
+        display:flex;
+        flex-flow: row wrap;
+        padding: 2em;
+        justify-content: space-between;
+    }
+    header{
+        flex: 100%;
+    }
+    .location-button{
+        align-self: flex-end;
+    }
+    .location-image{
+        width: 100%;
         height: 300px;
-        margin: 20px;
-        border-radius: 2em;
-        overflow: hidden;
-        display: flex;
     }
-    .location-picture{
-        transform: translateX(-1em);
-
-    }
-
-
 }
 
+@media only screen and (min-width: 768px){
+    .location-card {
+        flex-direction: row;
+        max-height: 279px;
+
+        header {
+            font-size: calc(100% + 1vw);
+        }
+
+        .location-image {
+            transform: translateX(-1em);
+            max-width: 390px;
+            max-height: 279px;
+        }
+    }
+}
 

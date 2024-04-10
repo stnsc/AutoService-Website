@@ -8,20 +8,26 @@ export default function LocatiiPage() {
     <>
       <HeroTitle title={"Locatii"} description={"Descriere Pagina Locatii"} />
 
-      <div className="row location-container">
+      <div className="location-container">
         {[...Array(10)].map((x, i) => (
           <>
-            <div className="location-div">
+            <div className="location-card">
               <img
-                className="location-picture"
+                className="location-image"
                 src="../../assets/placeholder.png"
                 alt="Foto Locatie"
               />
-              <h1 className="location-name">Nume Locatie</h1>
-              <p className="location-desc">
-                Descriere Locatie {<br />} Lorem Ipsum
-              </p>
-              <button className="btn btn-primary">Inregistreaza-te!</button>
+              <div className="location-body">
+                <h1 className="location-name">
+                  Nume Locatie asdasdasdasdasdasd
+                </h1>
+                <p className="location-desc">
+                  Descriere Locatie {<br />} Lorem Ipsum
+                </p>
+                <button className="location-button btn btn-primary">
+                  Inregistreaza-te!
+                </button>
+              </div>
             </div>
           </>
         ))}
