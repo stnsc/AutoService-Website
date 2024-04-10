@@ -145,23 +145,24 @@ body {
     margin: 0;
 }
 
-.grid-location{
-    display: grid;
-    grid-template-areas:
-        "a a b"
-        "a a c"
-        "a a c";
-    justify-items: start;
-    align-items: start;
-    justify-content: start;
-    gap: 10px;
+.location-container{
+    justify-content: center;
+
+    .location-div{
+        background: gray;
+        width: 90%;
+        height: 300px;
+        margin: 20px;
+        border-radius: 2em;
+        overflow: hidden;
+        display: flex;
+    }
+    .location-picture{
+        transform: translateX(-1em);
+
+    }
+
+
 }
 
-.location-image{
-    grid-area: a;
-}
-
-.location-name{
-    grid-area: b;
-}
 
