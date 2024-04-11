@@ -13,12 +13,12 @@ const getUsers = async () => {
       pool.query("SELECT * FROM users", (error, results) => {
         if (error) reject(error);
         if (results && results.rows) resolve(results.rows);
-        else reject(new Error("Nu s-au gasit rezultate."));
+        else reject(new Error("Nu s-au gasit utilizatori."));
       });
     });
   } catch (err) {
     console.error(err);
-    throw new Error("Eroare Server Intern");
+    throw new Error("Eroare Server Intern, Utilizatori");
   }
 };
 

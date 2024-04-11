@@ -50,7 +50,7 @@ export default function SignUpForm() {
       return;
     }
 
-    fetch("http://localhost:3001/api/create", {
+    fetch("http://localhost:3001/api/users/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

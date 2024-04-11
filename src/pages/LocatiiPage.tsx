@@ -1,28 +1,41 @@
 import { motion, useIsPresent } from "framer-motion";
 import HeroTitle from "../components/HeroTitle.tsx";
+import { useEffect, useState } from "react";
 
 export default function LocatiiPage() {
   const isPresent = useIsPresent();
+
+  const [locations, setLocations] = useState([]);
+
+  function getLocations() {
+    fetch("http://localhost:3001/api/locations")
+      .then((response) => response.json())
+      .then((result) => setLocations(result))
+      .catch((error) => console.error("Error fetching: " + error));
+  }
+
+  useEffect(() => {
+    getLocations();
+  }, []);
 
   return (
     <>
       <HeroTitle title={"Locatii"} description={"Descriere Pagina Locatii"} />
 
       <div className="location-container">
-        {[...Array(10)].map((x, i) => (
+        {locations.map(({ id, name, description, address, image, coords }) => (
           <>
-            <div className="location-card">
+            <div className="location-card" key={id}>
               <img
                 className="location-image"
-                src="../../assets/placeholder.png"
-                alt="Foto Locatie"
+                alt=""
+                style={{ backgroundImage: "url(" + image + ")" }}
               />
+
               <div className="location-body">
-                <h1 className="location-name">
-                  Nume Locatie asdasdasdasdasdasd
-                </h1>
+                <h1 className="location-name">{name}</h1>
                 <p className="location-desc">
-                  Descriere Locatie {<br />} Lorem Ipsum
+                  {description} {<br />} {address} {<br />} {coords}
                 </p>
                 <button className="location-button btn btn-primary">
                   Inregistreaza-te!

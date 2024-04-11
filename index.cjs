@@ -1,6 +1,7 @@
 const express = require("express");
 
 const users_model = require("./pg/usersModel.cjs");
+const locations_model = require("./pg/locationsModel.cjs");
 
 const app = express();
 const port = 3001;
@@ -17,7 +18,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-
+/* USERS */
 // get users
 app.get(`${path}/users`, (req, res) => {
   users_model
@@ -31,7 +32,7 @@ app.get(`${path}/users`, (req, res) => {
 });
 
 // create user
-app.post(`${path}/create`, (req, res) => {
+app.post(`${path}/users/create`, (req, res) => {
   users_model.createUser(req.body)
     .then(response => {
       res.status(200).send(response);
@@ -39,6 +40,18 @@ app.post(`${path}/create`, (req, res) => {
     .catch(error => {
       res.status(500).send(error);
     })
+})
+
+/* LOCATIONS */
+//get locations
+app.get(`${path}/locations`, (req, res) => {
+  locations_model.getLocations()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
 })
 
 

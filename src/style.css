@@ -145,19 +145,27 @@ body {
     margin: 0;
 }
 
+.location-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .location-card{
     background: rgba(54, 224, 199, 0.3);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 100px 0 55px 0 rgba(54, 224, 199, 0.2), -100px 0 55px 0 rgba(54, 224, 199, 0.2);
     border-radius: 2em;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     margin: 2em;
+    max-width: 1000px;
     .location-body{
         display:flex;
         flex-flow: row wrap;
         padding: 2em;
         justify-content: space-between;
+        width: 100%;
     }
     header{
         flex: 100%;
