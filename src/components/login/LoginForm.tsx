@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AlertComponent from "../AlertComponent.tsx";
 
 export default function LoginForm() {
-  const [users, setUsers] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
   const [err, setErr] = useState(0);
   const [type, setType] = useState(0);
@@ -14,17 +13,6 @@ export default function LoginForm() {
   ];
 
   const alert_type = ["danger", "primary"];
-
-  function getUsers() {
-    fetch("http://localhost:3001/api/users")
-      .then((response) => response.json())
-      .then((result) => setUsers(result))
-      .catch((error) => console.error("Error fetching: " + error));
-  }
-
-  useEffect(() => {
-    getUsers();
-  }, []);
 
   function handleInputChange() {
     setShowAlert(false);
@@ -46,23 +34,35 @@ export default function LoginForm() {
     if (!email.length || !password.length) {
       setShowAlert(true);
       setErr(0);
+      return;
     }
 
-    let userFound = false;
+    fetch("http://localhost:3001/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Date incorecte");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("name", data.name);
 
-    users.forEach(({ email: email1, password: password1 }) => {
-      if (email1 === email && password1 === password) {
-        userFound = true;
-      }
-    });
-
-    setShowAlert(true);
-    if (!userFound) {
-      setErr(1);
-    } else {
-      setType(1);
-      setErr(2);
-    }
+        setShowAlert(true);
+        setType(1);
+        setErr(2);
+      })
+      .catch(() => {
+        setShowAlert(true);
+        setType(0);
+        setErr(1);
+      });
   }
 
   return (

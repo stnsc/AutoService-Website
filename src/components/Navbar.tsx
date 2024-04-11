@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    const loggedUser = localStorage.getItem("name");
+    if (loggedUser) {
+      setUser(loggedUser);
+    }
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-sm fixed-top">
       <div className="container-fluid">
@@ -24,6 +34,9 @@ export default function Navbar() {
             Contact
           </Link>
         </div>
+        <span>
+          <p className="m-0">{user ? `Buna, ${user}!` : "Guest"}</p>
+        </span>
         <span>
           <Link to="/login" className="nav-link px-4 me-2">
             Login

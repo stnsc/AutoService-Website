@@ -1,26 +1,13 @@
+require('dotenv').config();
+
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "AutoService",
-  password: "admin",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT
 });
-
-const getUsers = async () => {
-  try {
-    return await new Promise(function (resolve, reject) {
-      pool.query("SELECT * FROM users", (error, results) => {
-        if (error) reject(error);
-        if (results && results.rows) resolve(results.rows);
-        else reject(new Error("Nu s-au gasit utilizatori."));
-      });
-    });
-  } catch (err) {
-    console.error(err);
-    throw new Error("Eroare Server Intern, Utilizatori");
-  }
-};
 
 const createUser = (body) => {
   return new Promise(function (resolve, reject) {
@@ -37,7 +24,28 @@ const createUser = (body) => {
   });
 }
 
+const loginUser = async (email, password) => {
+  try {
+    const user = await new Promise((resolve, reject) => {
+      pool.query("SELECT * FROM users WHERE email = $1", [email], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Utilizatorul nu exista."));
+      })
+    });
+
+    if(user.password === password) {
+      const {id, name, email} = user;
+      return {id, name, email, message: "Logat cu succes!"};
+    } else throw new Error("Parola incorecta.");
+
+  } catch (error) {
+    console.error(error);
+    throw new Error("Eroare la autentificare.");
+  }
+}
+
 module.exports = {
-  getUsers,
   createUser,
+  loginUser,
 };
