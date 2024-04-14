@@ -196,3 +196,7 @@ body {
     }
 }
 
+.nav-selected {
+    background: rgba(173, 173, 173, 0.5);
+    border-radius: 2em;
+}
