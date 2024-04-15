@@ -7,6 +7,8 @@ import ContactPage from "./pages/ContactPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import { AnimatePresence } from "framer-motion";
 import DatabaseDebugPage from "./pages/DatabaseDebugPage.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
+import ManagePage from "./pages/ManagePage.tsx";
 
 export default function App() {
   const element = useRoutes([
@@ -31,8 +33,16 @@ export default function App() {
       element: <LoginPage />,
     },
     {
+      path: "/manage",
+      element: <ManagePage />,
+    },
+    {
       path: "/db",
       element: <DatabaseDebugPage />,
+    },
+    {
+      path: "*",
+      element: <NotFoundPage />,
     },
   ]);
 

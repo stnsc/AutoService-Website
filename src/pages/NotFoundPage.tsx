@@ -11,7 +11,6 @@ export default function NotFoundPage() {
       <Link to="/" className="btn btn-primary">
         Inapoi acasa
       </Link>
-
       <motion.div
         className="screen-wipe"
         initial={{ scaleX: 1 }}

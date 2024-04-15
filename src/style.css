@@ -199,4 +199,69 @@ body {
 .nav-selected {
     background: rgba(173, 173, 173, 0.5);
     border-radius: 2em;
+    font-weight: bold;
 }
+
+.manage-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 5em;
+
+    .manage-nav{
+        display: flex;
+        background: rgba(154, 229, 203, 0.3);
+        width: 20%;
+        margin: 1em;
+        border-radius: 2em;
+        padding: 1em;
+
+        .manage-ul{
+            width: 100%;
+        }
+
+        .manage-li{
+            background: rgba(0, 0, 0, 0.05);
+            margin: .5em;
+            padding: .5em .5em .5em 1em;
+            border-radius: 1em;
+        }
+
+        .manage-li:hover{
+            background: rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .manage-icon{
+            margin-right: .3em;
+        }
+
+        .li-emphasis{
+            background: rgba(0, 0, 0, 0.15) !important;
+            cursor: default !important;
+            text-decoration: none !important;
+            font-weight: bold;
+            font-size: larger;
+            text-align: center;
+            padding: .5em;
+        }
+
+        .li-break{
+            background: none !important;
+            cursor: default !important;
+            height: 1em;
+        }
+
+    }
+
+    .manage-content{
+        display: flex;
+        background: rgba(158, 190, 177, 0.3);
+        width: 80%;
+        margin: 1em;
+        border-radius: 2em;
+        padding: 1em;
+    }
+}
+
+
