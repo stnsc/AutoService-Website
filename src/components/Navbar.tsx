@@ -1,19 +1,42 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 export default function Navbar() {
   const [user, setUser] = useState("");
   const [isActive, setActive] = useState("Acasa");
 
+  console.log("user: " + user);
+
   const inactiveClass = "nav-link px-2 me-1";
   const activeClass = inactiveClass + " nav-selected";
 
   useEffect(() => {
-    const loggedUser = localStorage.getItem("name");
-    if (loggedUser) {
-      setUser(loggedUser);
+    const token: string = localStorage.getItem("token") as string;
+    if (!token) {
+      localStorage.removeItem("name");
+      return;
     }
-  }, []);
+
+    const decodedToken = jwtDecode(token);
+
+    const currentDate = new Date();
+
+    if (decodedToken.exp * 1000 < currentDate.getTime()) {
+      //failed
+      setUser("");
+    } else {
+      //success
+      setUser(localStorage.getItem("name") as string);
+    }
+  }, [user, setUser]);
+
+  function handleDisconnect() {
+    localStorage.removeItem("name");
+    localStorage.removeItem("token");
+
+    window.location.reload();
+  }
 
   return (
     <nav className="navbar navbar-expand-sm fixed-top">
@@ -54,18 +77,23 @@ export default function Navbar() {
             Contact
           </Link>
         </div>
-        <span>
+        <div className="nav-user-info">
           <p className="m-0 p-3">{user ? `Buna, ${user}!` : "Guest"}</p>
-        </span>
-        <span>
+          <p
+            className={`${!user ? "d-none" : ""} logout-hover m-0 p-3`}
+            style={{}}
+            onClick={handleDisconnect}
+          >
+            Log out
+          </p>
           <Link
             to="/login"
-            className={`${isActive === "Login" ? activeClass : inactiveClass}`}
+            className={`${user ? "d-none" : ""} m-0 p-3 ${isActive === "Login" ? activeClass : inactiveClass}`}
             onClick={() => setActive("Login")}
           >
             Login
           </Link>
-        </span>
+        </div>
       </div>
     </nav>
   );

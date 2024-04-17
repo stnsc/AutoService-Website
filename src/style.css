@@ -109,26 +109,31 @@ body {
     align-items: center;
     position: fixed;
     width: 100%;
+
+    .login-text-container{
+        width: 80%;
+        text-align: left;
+        filter: drop-shadow(0px 0px 2px black);
+    }
+
+    .login-input-container{
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(5em);
+        padding: 40px;
+        border-radius: 1em;
+        width: 400px;
+
+        .gap-login{
+            display: grid;
+            gap: 10px;
+        }
+    }
 }
 
-.login-text-container{
-    text-align: left;
-    filter: drop-shadow(0px 0px 2px black);
-}
-
-.login-input-container{
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5em);
-    padding: 40px;
-    border-radius: 1em;
-    width: 400px;
-}
-
-.gap-login{
-    display: grid;
-    gap: 10px;
+.logout-hover:hover{
+    cursor: pointer;
 }
 
 .auth-text{
@@ -200,6 +205,12 @@ body {
     background: rgba(173, 173, 173, 0.5);
     border-radius: 2em;
     font-weight: bold;
+}
+
+.nav-user-info{
+    display: flex;
+    background: rgba(173, 173, 173, 0.5);
+    border-radius: 2em;
 }
 
 .manage-container{

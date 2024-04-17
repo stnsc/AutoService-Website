@@ -9,7 +9,7 @@ export default function LoginForm() {
   const err_array = [
     "Campurile nu au fost completate corespunzator",
     "Date incorecte",
-    "Logat cu succes!",
+    "Logat cu succes! Pagina se va reincarca...",
   ];
 
   const alert_type = ["danger", "primary"];
@@ -57,6 +57,8 @@ export default function LoginForm() {
         setShowAlert(true);
         setType(1);
         setErr(2);
+
+        window.location.reload();
       })
       .catch(() => {
         setShowAlert(true);
