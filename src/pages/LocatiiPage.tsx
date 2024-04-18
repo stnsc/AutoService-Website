@@ -1,11 +1,15 @@
-import { motion, useIsPresent } from "framer-motion";
+import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import HeroTitle from "../components/HeroTitle.tsx";
 import { useEffect, useState } from "react";
+import ModalComponent from "../components/ModalComponent.tsx";
 
 export default function LocatiiPage() {
   const isPresent = useIsPresent();
 
   const [locations, setLocations] = useState([]);
+  const [data, setData] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [logged, isLogged] = useState(false);
 
   function getLocations() {
     fetch("http://localhost:3001/api/locations")
@@ -15,6 +19,12 @@ export default function LocatiiPage() {
   }
 
   useEffect(() => {
+    const user = localStorage.getItem("name");
+    if (user) {
+      isLogged(true);
+    }
+    console.log(logged);
+
     getLocations();
   }, []);
 
@@ -37,11 +47,41 @@ export default function LocatiiPage() {
                 <p className="location-desc">
                   {description} {<br />} {address} {<br />} {coords}
                 </p>
-                <button className="location-button btn btn-primary">
-                  Inregistreaza-te!
-                </button>
+                {logged && (
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="location-button btn btn-primary"
+                    onClick={() => {
+                      setModalOpen(true);
+                      setData([name]);
+                    }}
+                  >
+                    Inregistreaza-te!
+                  </motion.button>
+                )}
+                {!logged && (
+                  <button disabled className="location-button btn btn-primary">
+                    Logheaza-te pentru a continua
+                  </button>
+                )}
               </div>
             </div>
+
+            <AnimatePresence
+              initial={false}
+              mode="wait"
+              onExitComplete={() => null}
+            >
+              {isModalOpen && (
+                <ModalComponent onClose={() => setModalOpen(false)}>
+                  <h2>
+                    Ai Selectat{" "}
+                    <span style={{ fontWeight: "bold" }}>{data[0]}</span>
+                  </h2>
+                </ModalComponent>
+              )}
+            </AnimatePresence>
           </>
         ))}
       </div>
