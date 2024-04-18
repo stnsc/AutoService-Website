@@ -6,15 +6,17 @@ export default function Navbar() {
   const [user, setUser] = useState("");
   const [isActive, setActive] = useState("Acasa");
 
-  console.log("user: " + user);
-
   const inactiveClass = "nav-link px-2 me-1";
   const activeClass = inactiveClass + " nav-selected";
 
   useEffect(() => {
     const token: string = localStorage.getItem("token") as string;
-    if (!token) {
+    const name: string = localStorage.getItem("name") as string;
+    const user_id: string = localStorage.getItem("user_id") as string;
+    if (!token || !name || !user_id) {
       localStorage.removeItem("name");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user_id");
       return;
     }
 
@@ -27,13 +29,14 @@ export default function Navbar() {
       setUser("");
     } else {
       //success
-      setUser(localStorage.getItem("name") as string);
+      setUser(name);
     }
   }, [user, setUser]);
 
   function handleDisconnect() {
     localStorage.removeItem("name");
     localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
 
     window.location.reload();
   }

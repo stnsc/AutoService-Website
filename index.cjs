@@ -48,11 +48,13 @@ app.post(`${path}/users/login`, (req, res) => {
 
   loginUser(email, password)
     .then((response) => {
-      const token = generateToken(response.id);
+      console.log(response);
+
+      const token = generateToken(response.user_id);
 
       console.log(token);
 
-      res.status(200).json({message: response, token, name: response.name});
+      res.status(200).json({message: response, token, name: response.name, id: response.user_id});
     })
     .catch((error) => {
       res.status(500).send(error.message);

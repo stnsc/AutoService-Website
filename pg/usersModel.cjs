@@ -35,8 +35,8 @@ const loginUser = async (email, password) => {
     });
 
     if(user.password === password) {
-      const {id, name, email} = user;
-      return {id, name, email, message: "Logat cu succes!"};
+      const {user_id, name, email} = user;
+      return {user_id, name, email, message: "Logat cu succes!"};
     } else throw new Error("Parola incorecta.");
 
   } catch (error) {

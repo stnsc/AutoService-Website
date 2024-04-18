@@ -53,6 +53,7 @@ export default function LoginForm() {
       .then((data) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("name", data.name);
+        localStorage.setItem("user_id", data.id);
 
         setShowAlert(true);
         setType(1);
