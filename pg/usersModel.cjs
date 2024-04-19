@@ -19,7 +19,7 @@ const createUser = (body) => {
         if (error) reject(error);
         if (results && results.rows) {
           resolve(`Un utilizator a fost adaugat: ${JSON.stringify(results.rows[0])}`);
-        } else reject(new Error("Nu s-a putut executa adaugarea."));
+        } else reject(new Error("Nu s-a putut adauga utilizatorul."));
       });
   });
 }

@@ -294,7 +294,7 @@ body {
 
     .modal-content{
         position: fixed;
-        width: 60%;
+        width: 40%;
         max-width: 800px;
         padding: 2em;
         border-radius: 2em;
@@ -305,7 +305,18 @@ body {
         position: absolute;
         top: 1em;
         right: 1em;
+        cursor: pointer;
     }
+}
+
+.schedule-section{
+    background: rgba(0,0,0,0.15);
+    margin-top: .5em;
+    border-radius: 1em;
+    padding-left: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    width: 100%;
 }
 
 

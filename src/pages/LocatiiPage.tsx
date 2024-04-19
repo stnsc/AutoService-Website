@@ -10,12 +10,18 @@ export default function LocatiiPage() {
   const [data, setData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [logged, isLogged] = useState(false);
+  const [dateTime, setDateTime] = useState("");
 
   function getLocations() {
     fetch("http://localhost:3001/api/locations")
       .then((response) => response.json())
       .then((result) => setLocations(result))
       .catch((error) => console.error("Error fetching: " + error));
+  }
+
+  function handleDateChange(e) {
+    const dt = e.target.value;
+    setDateTime(dt);
   }
 
   useEffect(() => {
@@ -67,24 +73,36 @@ export default function LocatiiPage() {
                 )}
               </div>
             </div>
-
-            <AnimatePresence
-              initial={false}
-              mode="wait"
-              onExitComplete={() => null}
-            >
-              {isModalOpen && (
-                <ModalComponent onClose={() => setModalOpen(false)}>
-                  <h2>
-                    Ai Selectat{" "}
-                    <span style={{ fontWeight: "bold" }}>{data[0]}</span>
-                  </h2>
-                </ModalComponent>
-              )}
-            </AnimatePresence>
           </>
         ))}
       </div>
+
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {isModalOpen && (
+          <ModalComponent onClose={() => setModalOpen(false)}>
+            <h2>
+              Ai Selectat <span style={{ fontWeight: "bold" }}>{data[0]}</span>
+            </h2>
+            <div className="schedule-section">
+              <h4>Data programare:</h4>
+              <input
+                aria-label="Date and time"
+                type="datetime-local"
+                value={(dateTime || "").toString()}
+                onChange={handleDateChange}
+              />
+              <p>{dateTime}</p>
+            </div>
+            <div className="schedule-section">
+              <h4>Detalii aditionale:</h4>
+              <textarea name="body" />
+            </div>
+            <div className="schedule-section">
+              <button className="btn btn-primary">Programeaza-te</button>
+            </div>
+          </ModalComponent>
+        )}
+      </AnimatePresence>
 
       <motion.div
         className="screen-wipe"
