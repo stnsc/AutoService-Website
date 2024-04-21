@@ -11,10 +11,11 @@ const pool = new Pool({
 
 const createAppointment = (body) => {
     return new Promise(function (resolve, reject) {
-        const {app_id, user_id, location_id, app_date, app_notes} = body;
+        const {locationID, userID, dateTime, details} = body;
+
         pool.query(
-            "INSERT INTO appointments (app_id, user_id, location_id, app_date, app_notes) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-            [app_id, user_id, location_id, app_date, app_notes],
+            "INSERT INTO appointments (user_id, location_id, app_date, app_notes) VALUES ($1, $2, $3, $4) RETURNING *",
+            [userID, locationID, dateTime, details],
             (error, results) => {
                 if(error) reject(error);
                 if(results && results.rows) {
@@ -23,4 +24,8 @@ const createAppointment = (body) => {
             }
         )
     })
+}
+
+module.exports = {
+    createAppointment
 }

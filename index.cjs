@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 
 const users_model = require("./pg/usersModel.cjs");
 const locations_model = require("./pg/locationsModel.cjs");
-const {loginUser} = require("./pg/usersModel.cjs");
+const appointments_model = require("./pg/appointmentsModel.cjs");
 
 const app = express();
 const port = 3001;
@@ -44,9 +44,7 @@ app.post(`${path}/users/create`, (req, res) => {
 app.post(`${path}/users/login`, (req, res) => {
   const {email, password} = req.body;
 
-  console.log(req.body);
-
-  loginUser(email, password)
+  users_model.loginUser(email, password)
     .then((response) => {
       console.log(response);
 
@@ -71,6 +69,18 @@ app.get(`${path}/locations`, (req, res) => {
   .catch(error => {
     res.status(500).send(error);
   })
+})
+
+/* APPOINTMENTS */
+//add appointment
+app.post(`${path}/appointments/create`, (req, res) => {
+  appointments_model.createAppointment(req.body)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
 })
 
 
