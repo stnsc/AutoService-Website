@@ -319,6 +319,15 @@ body {
     width: 100%;
 }
 
+.appointment-container{
+    .appointment-card{
+        background-color: rgba(0,0,0,0.10);
+        border-radius: .5em;
+        padding: 1em;
+        margin: 1em;
+    }
+}
+
 
 
 

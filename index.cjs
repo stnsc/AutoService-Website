@@ -83,6 +83,30 @@ app.post(`${path}/appointments/create`, (req, res) => {
     })
 })
 
+//get appointments for a user
+app.get(`${path}/appointments/user`, (req, res) => {
+  const userID = req.query.userID;
+  if(!userID) return res.status(400).send("Missing user parameter.")
+
+  appointments_model.getAppointments(userID)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+//get all appointments (admin command)
+app.get(`${path}/appointments/getAll`, (req, res) => {
+  appointments_model.getAllAppointments()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
 
 app.listen(port, () => {
   console.log(`App Running on Port ${port}.`);
