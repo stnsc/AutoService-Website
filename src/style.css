@@ -271,12 +271,15 @@ body {
     }
 
     .manage-content{
-        display: flex;
+        display: block;
         background: rgba(158, 190, 177, 0.3);
         width: 80%;
         margin: 1em;
         border-radius: 2em;
         padding: 1em;
+        height: 60vh;
+        overflow: scroll;
+        overflow-x: hidden;
     }
 }
 
