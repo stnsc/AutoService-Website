@@ -11,7 +11,9 @@ import NotFoundPage from "./pages/NotFoundPage.tsx";
 import ManagePage from "./pages/ManagePage.tsx";
 
 export default function App() {
+  //Rutele pentru a schimba intre pagini
   const element = useRoutes([
+    // elementul "/" duce la pagina principala daca link-ul nu ofera parametrii
     {
       path: "/",
       element: <HomePage />,
@@ -40,6 +42,7 @@ export default function App() {
       path: "/db",
       element: <DatabaseDebugPage />,
     },
+    //elementul "*" duce la pagina 404 daca nu gaseste un link specificat mai sus
     {
       path: "*",
       element: <NotFoundPage />,
@@ -51,6 +54,7 @@ export default function App() {
   if (!element) return null;
 
   return (
+    //Componenta <AnimatePresence> ofera animatii intre pagini
     <AnimatePresence mode="wait" initial={false}>
       {React.cloneElement(element, { key: location.pathname })};
     </AnimatePresence>

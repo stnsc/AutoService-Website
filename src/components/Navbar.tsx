@@ -2,14 +2,24 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
+/*
+ * Bara de navigatie
+ *
+ * Ofera functionalitate pentru schimbarea paginilor,
+ * si ofera un status pentru logarea utilizatorului
+ * */
+
 export default function Navbar() {
   const [user, setUser] = useState("");
   const [isActive, setActive] = useState("Acasa");
 
+  //clase active si inactive pentru afisarea dinamica a paginii curente
   const inactiveClass = "nav-link px-2 me-1";
   const activeClass = inactiveClass + " nav-selected";
 
   useEffect(() => {
+    //se verifica daca exista cookie-uri in stocarea locala a utilizatorului
+    //daca nu se gaseste nimic dintre cele trei variabile, utilizatoul este deconectat
     const token: string = localStorage.getItem("token") as string;
     const name: string = localStorage.getItem("name") as string;
     const user_id: string = localStorage.getItem("user_id") as string;
@@ -20,6 +30,14 @@ export default function Navbar() {
       return;
     }
 
+    // validarea expirarii token-ului de autentificare
+    /*
+     * utilizatorul dupa logare va primii sub forma de cookie
+     * o cheie criptata care va fi valabila pentru 24 de ore
+     *
+     * daca utilizatorul se logheaza peste 24 de ore dupa
+     * generarea cheii, atunci acesta va fi deconectat
+     * */
     const decodedToken = jwtDecode(token);
 
     const currentDate = new Date();
@@ -33,6 +51,9 @@ export default function Navbar() {
     }
   }, [user, setUser]);
 
+  //functie care sterge toate cookie-urile si
+  //reimprospateaza pagina pentru deconectarea
+  //utilizatorului
   function handleDisconnect() {
     localStorage.removeItem("name");
     localStorage.removeItem("token");
@@ -48,6 +69,12 @@ export default function Navbar() {
           <img src="../../assets/logo.png" alt="Bootstrap" height="60" />
         </a>
         <div className="navbar me-auto p-2" id="navbarNav">
+          {/*
+            Frontend-ul navigatiei
+
+            Componentele <Link> muta utilizatorul de la o pagina la alta
+            si modifica stilul butonului
+          */}
           <Link
             to="/"
             className={`${isActive === "Acasa" ? activeClass : inactiveClass}`}
@@ -82,12 +109,19 @@ export default function Navbar() {
         </div>
         <div className="nav-user-info">
           <p className="m-0 p-3">{user ? `Buna, ${user}!` : "Guest"}</p>
+          <Link
+            to="/manage"
+            className={`${isActive === "Details" ? activeClass : inactiveClass} m-0 p-3`}
+            onClick={() => setActive("Details")}
+          >
+            Detalii cont
+          </Link>
           <p
-            className={`${!user ? "d-none" : ""} logout-hover m-0 p-3`}
+            className={`${!user ? "d-none" : ""} logout-hover m-0 p-3 nav-link`}
             style={{}}
             onClick={handleDisconnect}
           >
-            Log out
+            Deconectare
           </p>
           <Link
             to="/login"

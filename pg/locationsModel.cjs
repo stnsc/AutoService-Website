@@ -1,3 +1,9 @@
+/*
+* Locations Model
+*
+* Functii care folosesc libraria Express, pentru a conecta frontend-ul cu backend-ul
+* */
+
 require('dotenv').config();
 
 const Pool = require("pg").Pool;
@@ -9,6 +15,7 @@ const pool = new Pool({
   port: process.env.DB_PORT
 });
 
+//functie pentru a afisa toate locatiile din baza de date "locations"
 const getLocations = async () => {
   try {
     return await new Promise(function (resolve, reject) {

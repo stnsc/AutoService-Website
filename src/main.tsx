@@ -9,6 +9,15 @@ import App from "./App.tsx";
 import Navbar from "./components/Navbar.tsx";
 import Footer from "./components/Footer.tsx";
 
+/*
+* Singurul modul care este vazut de pagina de HTML
+* Componenta App este incapsulata de bara de navigatie si footer-ul
+* care sunt prezente tot timpul
+* Ofera suport pentru schimari de pagina cu <BrowserRouter>
+si suport pentru cookie-uri <CookiesProvider>
+*
+* */
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <CookiesProvider>

@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 
+interface Appointment {
+  app_id: string;
+  user_id: string;
+  location_id: string;
+  app_date: string;
+  app_notes: string;
+}
+
 export default function AdminScheduleComponent() {
   const [appointments, setAppointments] = useState([]);
 
@@ -18,7 +26,13 @@ export default function AdminScheduleComponent() {
     <>
       <div className="appointment-container">
         {appointments.map(
-          ({ app_id, user_id, location_id, app_date, app_notes }) => (
+          ({
+            app_id,
+            user_id,
+            location_id,
+            app_date,
+            app_notes,
+          }: Appointment) => (
             <>
               <div className="appointment-card" key={app_id}>
                 <h4>Appointment ID:{app_id}</h4>

@@ -2,6 +2,11 @@ import HeroTitle from "../components/HeroTitle.tsx";
 
 import { motion, useIsPresent } from "framer-motion";
 
+/*
+ * Pagina Acasa
+ * Ofera informatii generale despre Sistemul Web "Auto Service"
+ * */
+
 export default function HomePage() {
   const isPresent = useIsPresent();
 
@@ -117,6 +122,13 @@ export default function HomePage() {
           </a>
         </div>
       </div>
+
+      {/*
+        Metoda pentru a adauga tranzitii intre pagini
+        clasa "screen-wipe" ofera instructiunile pentru animatie,
+        iar proprietatile date in <motion.div> ofera modul in care
+        parametrii sunt modificati
+      */}
       <motion.div
         className="screen-wipe"
         initial={{ scaleX: 1 }}
@@ -127,11 +139,3 @@ export default function HomePage() {
     </>
   );
 }
-
-/**
- * navbar
- * hero
- * services
- * statistics
- * contact
- * */

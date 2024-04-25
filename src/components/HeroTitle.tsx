@@ -1,3 +1,8 @@
+/*
+ * Functie pentru adaugarea unei componente de tip hero modular
+ * care accepta ca parametrii titlul si o descriere
+ * */
+
 interface Props {
   title: string;
   description: string;

@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 
+interface User {
+  email: string;
+  id: string;
+  name: string;
+}
+
 export default function DatabaseDebugPage() {
   const [users, setUsers] = useState([]);
 
@@ -18,7 +24,7 @@ export default function DatabaseDebugPage() {
     <>
       <div className="row row-cols-3">
         <h1>Baze de date utilizatori</h1>
-        {users.map(({ email, id, name }) => (
+        {users.map(({ email, id, name }: User) => (
           <div key={id} className="col">
             <div className="bg-primary p-3 rounded">
               <p>Nume: {name}</p>

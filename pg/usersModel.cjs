@@ -1,3 +1,9 @@
+/*
+* Users Model
+*
+* Functii care folosesc libraria Express, pentru a conecta frontend-ul cu backend-ul
+* */
+
 require('dotenv').config();
 
 const Pool = require("pg").Pool;
@@ -9,6 +15,7 @@ const pool = new Pool({
   port: process.env.DB_PORT
 });
 
+//functie pentru a crea un utilizator
 const createUser = (body) => {
   return new Promise(function (resolve, reject) {
     const {name, email, password, gender} = body;
@@ -24,9 +31,11 @@ const createUser = (body) => {
   });
 }
 
+//functie pentru validarea si autenficicarea utilizatorului
 const loginUser = async (email, password) => {
   try {
     const user = await new Promise((resolve, reject) => {
+      //se selecteaza randul tabelului care contine emailul dat
       pool.query("SELECT * FROM users WHERE email = $1", [email], (error, results) => {
         if(error) reject(error);
         if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
@@ -34,6 +43,8 @@ const loginUser = async (email, password) => {
       })
     });
 
+    //daca parola data de utilizator coincide cu cel din baza de date
+    //se valideaza incercare de autentificare
     if(user.password === password) {
       const {user_id, name, email} = user;
       return {user_id, name, email, message: "Logat cu succes!"};

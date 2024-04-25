@@ -1,3 +1,11 @@
+/*
+ * Componenta Footer
+ *
+ * Afisata mereu la sfarsitul paginii
+ * Ofera informatii precum pagina de GitHub,
+ * si un toggle de Dark Mode
+ * */
+
 export default function Footer() {
   function handleChange() {
     const { checked: darkModeValue } = document.getElementById(
@@ -6,10 +14,8 @@ export default function Footer() {
 
     if (darkModeValue) {
       document.documentElement.setAttribute("data-bs-theme", "dark");
-      //setCookie("dark-mode", true);
     } else {
       document.documentElement.setAttribute("data-bs-theme", "light");
-      //setCookie("dark-mode", false);
     }
   }
 

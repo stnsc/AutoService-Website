@@ -1,3 +1,9 @@
+/*
+* EXPRESS INDEX
+*
+* Fisierul care gestioneaza toate fetch-urile API
+* */
+
 require('dotenv').config();
 
 const express = require("express");
@@ -11,6 +17,7 @@ const app = express();
 const port = 3001;
 const path = "/api";
 
+//orice funcionalitate express neceita permisuni pentru a fi executat cu succes
 app.use(express.json());
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -24,9 +31,19 @@ app.use(function (req, res, next) {
 
 /* SESSION TOKEN */
 
+//functie pentru a genera o cheie criptata cu scopul de a tine utilizatorul
+//logat chiar daca pagina a fost inchisa, expira dupa 24 de ore
 function generateToken(id){
   return jwt.sign({id}, process.env.TOKEN_KEY, { expiresIn: '24h' });
 }
+
+/*
+* Modul in care API-urile sunt create si executate sunt asemanatoare
+* prin toate modelele:
+*
+* Un status code de 200, daca request-ul a fost executat cu succes din model
+* Un status code de 500, daca request-ul nu s-a executat
+* */
 
 /* USERS */
 // create user

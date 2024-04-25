@@ -4,8 +4,11 @@ import UserManageComponent from "../components/manage/UserManageComponent.tsx";
 import AdminContactComponent from "../components/manage/AdminContactComponent.tsx";
 import AdminScheduleComponent from "../components/manage/AdminScheduleComponent.tsx";
 import AdminLocationComponent from "../components/manage/AdminLocationComponent.tsx";
+import { motion, useIsPresent } from "framer-motion";
 
 export default function ManagePage() {
+  const isPresent = useIsPresent();
+
   const [page, setPage] = useState("");
 
   const renderPage = () => {
@@ -59,6 +62,14 @@ export default function ManagePage() {
         </div>
         <div className="manage-content">{renderPage()}</div>
       </div>
+
+      <motion.div
+        className="screen-wipe"
+        initial={{ scaleX: 1 }}
+        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
+        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+        style={{ originX: isPresent ? 0 : 1 }}
+      />
     </>
   );
 }

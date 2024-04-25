@@ -2,6 +2,12 @@ import LoginForm from "./LoginForm.tsx";
 import SignUpForm from "./SignUpForm.tsx";
 import { useState } from "react";
 
+/*
+ * Componenta pentru containerul de logare,
+ * contine doar partea vizuala, si un toggle
+ * pentru a schimba intre inregistrare si logare
+ * */
+
 export default function LoginContainer() {
   const [state, setState] = useState(0);
 
@@ -12,6 +18,7 @@ export default function LoginContainer() {
     "Logheaza-te aici.",
   ];
 
+  //toggle-ul pentru a schimba intre componentele <LoginForm> si <SignUpForm>
   function handleChange() {
     if (!state) setState((prevState) => prevState + 1);
     else setState((prevState) => prevState - 1);

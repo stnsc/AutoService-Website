@@ -1,20 +1,29 @@
 import { SetStateAction, useState } from "react";
 import AlertComponent from "../AlertComponent.tsx";
 
+/*
+ * Sign Up Form
+ *
+ * O componenta care gestioneaza
+ * adaugarea unui utilizator nou in baza
+ * de date "users"
+ * */
+
 export default function SignUpForm() {
-  const [gender, setGender] = useState(0);
+  //variabile pentru componenta <AlertComponent>
   const [showAlert, setShowAlert] = useState(false);
   const [err, setErr] = useState(0);
   const [type, setType] = useState(0);
-
   const err_array = [
     "Campurile nu au fost completate corespunzator",
     "Parolele nu sunt indentice.",
     "Cont creat!",
   ];
-
   const alert_type = ["danger", "primary"];
 
+  const [gender, setGender] = useState(0);
+
+  //functii care preiau date din form-uri
   function handleGenderChange(e: {
     target: { value: SetStateAction<number> };
   }) {
@@ -25,6 +34,7 @@ export default function SignUpForm() {
     setShowAlert(false);
   }
 
+  //functia pentru crearea utilizatorului
   function createUser(e: { preventDefault: () => void; target: never }) {
     e.preventDefault();
     setType(0);
@@ -37,7 +47,7 @@ export default function SignUpForm() {
     const password: string = data.password as string;
     const password_verify: string = data.password_verify as string;
 
-    //validation logic
+    //logica pentru validare
     if (!name.length || !email.length || !password || !password_verify) {
       setShowAlert(true);
       setErr(0);
@@ -50,6 +60,7 @@ export default function SignUpForm() {
       return;
     }
 
+    //fetch request-ul pentru a trimite datele in baza de date "users"
     fetch("http://localhost:3001/api/users/create", {
       method: "POST",
       headers: {
@@ -57,6 +68,8 @@ export default function SignUpForm() {
       },
       body: JSON.stringify({ name, email, password, gender }),
     }).then((response) => {
+      //la executarea cu succes, se afiseaza o alerta pentru a informa
+      //confirmarea adaugarii utilizatorului
       setShowAlert(true);
       setType(1);
       setErr(2);

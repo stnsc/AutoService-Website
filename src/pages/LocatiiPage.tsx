@@ -4,9 +4,26 @@ import { useEffect, useState } from "react";
 import ModalComponent from "../components/ModalComponent.tsx";
 import AlertComponent from "../components/AlertComponent.tsx";
 
+/*
+ * Pagina Locatii
+ *
+ * Ofera toate locatiile inregistrate in baza de date "locations" si
+ * o functie de programare daca utilizatorul este logat
+ * */
+
+interface Location {
+  location_id: string;
+  name: string;
+  description: string;
+  address: string;
+  image: string;
+  coords: string;
+}
+
 export default function LocatiiPage() {
   const isPresent = useIsPresent();
 
+  //variabile initializate
   const [locations, setLocations] = useState([]);
   const [data, setData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -15,6 +32,7 @@ export default function LocatiiPage() {
   const [details, setDetails] = useState("");
   const [userID, setUserID] = useState("");
 
+  //sectiunea pentru a afisa alterte
   const err_array = [
     "Programare adaugata cu succes!",
     "Campurile nu sunt completate.",
@@ -26,6 +44,8 @@ export default function LocatiiPage() {
   const [err, setErr] = useState(0);
   const [type, setType] = useState(0);
 
+  //fetch request pentru a arata toate locatiile in
+  //baza de date "locations"
   function getLocations() {
     fetch("http://localhost:3001/api/locations")
       .then((response) => response.json())
@@ -33,6 +53,7 @@ export default function LocatiiPage() {
       .catch((error) => console.error("Error fetching: " + error));
   }
 
+  //functii care preiau datele din text-box-uri
   function handleDateChange(e) {
     const dt = e.target.value;
     setDateTime(dt);
@@ -43,6 +64,7 @@ export default function LocatiiPage() {
     setDetails(dt);
   }
 
+  //functie pentru a adauga o programare
   function handleSubmit() {
     if (!dateTime || !details) {
       setShowAlert(true);
@@ -51,19 +73,23 @@ export default function LocatiiPage() {
       return;
     }
 
+    //fetch request pentru a trimte datele date de utilizator
     fetch("http://localhost:3001/api/appointments/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      //parametrii sunt dati intr-un format json
       body: JSON.stringify({ locationID: data[1], userID, dateTime, details }),
     })
       .then(async (response) => {
         switch (response.status) {
+          //daca request-ul s-a executat cu success
           case 200:
             setErr(0);
             setType(1);
             break;
+          //daca request-ul nu s-a executat
           case 500:
             setErr(2);
             setType(0);
@@ -79,6 +105,7 @@ export default function LocatiiPage() {
     setShowAlert(true);
   }
 
+  //functie care verifica logarea utilizatorului
   useEffect(() => {
     const user = localStorage.getItem("name");
     if (user) {
@@ -94,49 +121,67 @@ export default function LocatiiPage() {
       <HeroTitle title={"Locatii"} description={"Descriere Pagina Locatii"} />
 
       <div className="location-container">
-        {locations.map(
-          ({ location_id, name, description, address, image, coords }) => (
-            <>
-              <div className="location-card" key={location_id}>
-                <img
-                  className="location-image"
-                  alt=""
-                  style={{ backgroundImage: "url(" + image + ")" }}
-                />
+        {
+          // functie de map care afiseaza toate locatiile intr-un format visibil
+          locations.map(
+            ({
+              location_id,
+              name,
+              description,
+              address,
+              image,
+              coords,
+            }: Location) => (
+              <>
+                <div className="location-card" key={location_id}>
+                  <img
+                    className="location-image"
+                    alt=""
+                    style={{ backgroundImage: "url(" + image + ")" }}
+                  />
 
-                <div className="location-body">
-                  <h1 className="location-name">{name}</h1>
-                  <p className="location-desc">
-                    {description} {<br />} {address} {<br />} {coords}
-                  </p>
-                  {logged && (
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="location-button btn btn-primary"
-                      onClick={() => {
-                        setModalOpen(true);
-                        setData([name, location_id]);
-                      }}
-                    >
-                      Inregistreaza-te!
-                    </motion.button>
-                  )}
-                  {!logged && (
-                    <button
-                      disabled
-                      className="location-button btn btn-primary"
-                    >
-                      Logheaza-te pentru a continua
-                    </button>
-                  )}
+                  <div className="location-body">
+                    <h1 className="location-name">{name}</h1>
+                    <p className="location-desc">
+                      {description} {<br />} {address} {<br />} {coords}
+                    </p>
+                    {
+                      //buton pentru a deschide un pop-up cu detalii aditionale pentru
+                      //programare daca utilizatorul este logat
+                      logged && (
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="location-button btn btn-primary"
+                          onClick={() => {
+                            setModalOpen(true);
+                            setData([name, location_id]);
+                          }}
+                        >
+                          Inregistreaza-te!
+                        </motion.button>
+                      )
+                    }
+                    {!logged && (
+                      <button
+                        disabled
+                        className="location-button btn btn-primary"
+                      >
+                        Logheaza-te pentru a continua
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </>
-          ),
-        )}
+              </>
+            ),
+          )
+        }
       </div>
 
+      {/*
+        Pop-up ul pentru adaugarea informatiilor precum
+        data programarii si detalii aditionale
+      */}
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isModalOpen && (
           <ModalComponent onClose={() => setModalOpen(false)}>
@@ -162,13 +207,17 @@ export default function LocatiiPage() {
                 Programeaza-te
               </button>
             </div>
-            {showAlert && (
-              <AlertComponent
-                variant={alert_type[type]}
-                contents={err_array[err]}
-                dismiss={() => setShowAlert(false)}
-              />
-            )}
+            {
+              //compomenta care poate fi inchisa pentru aratarea
+              //unor alterte
+              showAlert && (
+                <AlertComponent
+                  variant={alert_type[type]}
+                  contents={err_array[err]}
+                  dismiss={() => setShowAlert(false)}
+                />
+              )
+            }
           </ModalComponent>
         )}
       </AnimatePresence>

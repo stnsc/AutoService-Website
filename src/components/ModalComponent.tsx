@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
 
+/*
+ * Componenta modulara pentru functia de pop-up
+ *
+ * Parametrul {children} incapsuleaza tot codul HTML pentru a fi afisat in Pop-ul,
+ * iar metoda {onClose} inchide fereastra
+ *
+ * De asemenea, folosim libraria "framer-motion" pentru animatiile componentei
+ * */
+
 export default function ModalComponent({ children, onClose }) {
   return (
     <>
