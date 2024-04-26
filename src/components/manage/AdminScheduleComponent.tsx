@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import ModalComponent from "../ModalComponent.tsx";
+import { AnimatePresence } from "framer-motion";
 
 interface Appointment {
   app_id: string;
   user_id: string;
-  location_id: string;
+  username: string;
+  name: string;
+  address: string;
   app_date: string;
   app_notes: string;
 }
@@ -11,11 +15,27 @@ interface Appointment {
 export default function AdminScheduleComponent() {
   const [appointments, setAppointments] = useState([]);
 
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [appID, setAppID] = useState("");
+
   function getAppointments() {
     fetch("http://localhost:3001/api/appointments/getAll")
       .then((response) => response.json())
       .then((result) => setAppointments(result))
       .catch((error) => console.error("Error fetching: " + error));
+  }
+
+  function handleDelete() {
+    fetch("http://localhost:3001/api/appointments/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ appID }),
+    }).then((response) => {
+      getAppointments();
+      return response.json();
+    });
   }
 
   useEffect(() => {
@@ -29,22 +49,63 @@ export default function AdminScheduleComponent() {
           ({
             app_id,
             user_id,
-            location_id,
+            username,
+            name,
+            address,
             app_date,
             app_notes,
           }: Appointment) => (
             <>
               <div className="appointment-card" key={app_id}>
-                <h4>Appointment ID:{app_id}</h4>
-                <h4>User ID:{user_id}</h4>
-                <h4>Location ID:{location_id}</h4>
-                <p>Date: {app_date}</p>
-                <p>Notes: {app_notes}</p>
+                <h4>
+                  Programare de la utilizatorul #{user_id}, cu numele {username}
+                </h4>
+                <p>
+                  La service-ul <b>{name}</b>, locat la <b>{address}</b>
+                </p>
+                La data de: <b>{app_date.split("T")[0]}</b>, ora{" "}
+                <b>{app_date.split("T")[1].substring(0, 5)}</b>
+                <p>Note date de utilizator: </p>
+                <p>{app_notes}</p>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setModalOpen(true);
+                    setAppID(app_id);
+                  }}
+                >
+                  Sterge programarea
+                </button>
               </div>
             </>
           ),
         )}
       </div>
+
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {isModalOpen && (
+          <ModalComponent onClose={() => setModalOpen(false)}>
+            <h3>Esti sigur ca vrei sa stergi aceasta programare?</h3>
+            <div className="flex-row">
+              <button
+                className="btn btn-secondary m-2"
+                onClick={() => {
+                  handleDelete();
+                  setModalOpen(false);
+                }}
+              >
+                Da
+              </button>
+              <button
+                className="btn btn-danger m-2"
+                onClick={() => setModalOpen(false)}
+              >
+                Nu
+              </button>
+            </div>
+          </ModalComponent>
+        )}
+      </AnimatePresence>
     </>
   );
 }

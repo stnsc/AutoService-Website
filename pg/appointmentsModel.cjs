@@ -59,7 +59,9 @@ const getAppointments = async (body) => {
 //o comanda de administrator pentru a afisa programarile tuturor utilizatorilor
 const getAllAppointments = async () => {
     return await new Promise((resolve, reject) => {
-        pool.query("SELECT * FROM appointments", (error, results) => {
+        pool.query(`SELECT appointments.app_id, users.user_id, users.name as username, locations.name, locations.address, appointments.app_date, appointments.app_notes
+                    FROM ((appointments INNER JOIN locations ON appointments.location_id = locations.location_id)
+                    INNER JOIN users ON appointments.user_id = users.user_id)`, (error, results) => {
             if (error) reject(error);
             if (results && results.rows && results.rows.length > 0) resolve(results.rows);
             else reject(new Error("Nu s-au gasit programari."));
@@ -67,8 +69,21 @@ const getAllAppointments = async () => {
     })
 }
 
+//comanda pentru a sterge o programare unui utilizator
+const deleteAppointment = async (body) => {
+    console.log(body.appID);
+    return await new Promise((resolve, reject) => {
+        pool.query("DELETE FROM appointments WHERE app_id = $1", [body.appID], (error, results) => {
+            if (error) reject(error);
+            if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+            else reject(new Error("Nu s-a putut sterge programarea."))
+        })
+    })
+}
+
 module.exports = {
     createAppointment,
     getAppointments,
-    getAllAppointments
+    getAllAppointments,
+    deleteAppointment
 }

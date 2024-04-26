@@ -114,6 +114,17 @@ app.get(`${path}/appointments/user`, (req, res) => {
     })
 })
 
+//delete appointment
+app.post(`${path}/appointments/delete`, (req, res) => {
+  appointments_model.deleteAppointment(req.body)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
 //get all appointments (admin command)
 app.get(`${path}/appointments/getAll`, (req, res) => {
   appointments_model.getAllAppointments()
