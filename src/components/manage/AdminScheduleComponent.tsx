@@ -18,11 +18,20 @@ export default function AdminScheduleComponent() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [appID, setAppID] = useState("");
 
+  const [error, showError] = useState(false);
+  const [loading, showLoading] = useState(true);
+
   function getAppointments() {
     fetch("http://localhost:3001/api/appointments/getAll")
       .then((response) => response.json())
       .then((result) => setAppointments(result))
-      .catch((error) => console.error("Error fetching: " + error));
+      .catch((error) => {
+        console.error("Error fetching: " + error);
+        showError(true);
+      })
+      .finally(() => {
+        showLoading(false);
+      });
   }
 
   function handleDelete() {
@@ -45,6 +54,23 @@ export default function AdminScheduleComponent() {
   return (
     <>
       <div className="appointment-container">
+        {loading && (
+          <div className="information-fetch">
+            <h1>
+              <i className="bi bi-arrow-clockwise"></i>
+            </h1>
+            <h2>Se incarca...</h2>
+          </div>
+        )}
+        {error && (
+          <div className="information-fetch">
+            <h1>
+              <i className="bi bi-exclamation-diamond"></i>
+            </h1>
+
+            <h2>Nu s-au gasit rezultate</h2>
+          </div>
+        )}
         {appointments.map(
           ({
             app_id,
