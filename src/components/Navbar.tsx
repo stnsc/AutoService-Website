@@ -24,9 +24,6 @@ export default function Navbar() {
     const name: string = localStorage.getItem("name") as string;
     const user_id: string = localStorage.getItem("user_id") as string;
     if (!token || !name || !user_id) {
-      localStorage.removeItem("name");
-      localStorage.removeItem("token");
-      localStorage.removeItem("user_id");
       return;
     }
 
@@ -44,12 +41,14 @@ export default function Navbar() {
 
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       //failed
-      setUser("");
+      localStorage.removeItem("name");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user_id");
     } else {
       //success
       setUser(name);
     }
-  }, [user, setUser]);
+  }, []);
 
   //functie care sterge toate cookie-urile si
   //reimprospateaza pagina pentru deconectarea
@@ -108,14 +107,19 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="nav-user-info">
-          <p className="m-0 p-3">{user ? `Buna, ${user}!` : "Guest"}</p>
-          <Link
-            to="/manage"
-            className={`${isActive === "Details" ? activeClass : inactiveClass} m-0 p-3`}
-            onClick={() => setActive("Details")}
-          >
-            Detalii cont
-          </Link>
+          {user && (
+            <>
+              <p className="m-0 p-3">{`Buna, ${user}!`}</p>
+              <Link
+                to="/manage"
+                className={`${isActive === "Details" ? activeClass : inactiveClass} m-0 p-3`}
+                onClick={() => setActive("Details")}
+              >
+                Detalii cont
+              </Link>
+            </>
+          )}
+
           <p
             className={`${!user ? "d-none" : ""} logout-hover m-0 p-3 nav-link`}
             style={{}}
@@ -125,7 +129,7 @@ export default function Navbar() {
           </p>
           <Link
             to="/login"
-            className={`${user ? "d-none" : ""} m-0 p-3 ${isActive === "Login" ? activeClass : inactiveClass}`}
+            className={`${user ? "d-none" : ""} m-1 p-3 ${isActive === "Login" ? activeClass : inactiveClass}`}
             onClick={() => setActive("Login")}
           >
             Login
