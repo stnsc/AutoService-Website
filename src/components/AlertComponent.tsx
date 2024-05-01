@@ -18,7 +18,7 @@ interface Props {
 export default function AlertComponent({ variant, contents, dismiss }: Props) {
   return (
     <>
-      <Alert variant={variant} onClose={dismiss} dismissible>
+      <Alert className="m-2" variant={variant} onClose={dismiss} dismissible>
         <p>{contents}</p>
       </Alert>
     </>

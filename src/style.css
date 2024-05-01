@@ -352,6 +352,9 @@ body {
         background-color: rgba(0,0,0,0.30);
         border-radius: 1em;
     }
+    .user-info-div{
+        display:flex;
+    }
 }
 
 

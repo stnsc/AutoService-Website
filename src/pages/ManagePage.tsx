@@ -1,6 +1,6 @@
 import { useState } from "react";
-import UserScheduleComponent from "../components/manage/UserScheduleComponent.tsx";
-import UserManageComponent from "../components/manage/UserManageComponent.tsx";
+import UserScheduleComponent from "../components/manage/user/UserScheduleComponent.tsx";
+import UserManageComponent from "../components/manage/user/UserManageComponent.tsx";
 import AdminContactComponent from "../components/manage/AdminContactComponent.tsx";
 import AdminScheduleComponent from "../components/manage/AdminScheduleComponent.tsx";
 import AdminLocationComponent from "../components/manage/AdminLocationComponent.tsx";
@@ -24,7 +24,7 @@ export default function ManagePage() {
       case "adminLocation":
         return <AdminLocationComponent />;
       default:
-        return <UserScheduleComponent />;
+        return <UserManageComponent />;
     }
   };
 
@@ -36,11 +36,11 @@ export default function ManagePage() {
             <li className="manage-li li-emphasis">
               <i className="bi bi-person-fill manage-icon"></i>Utilizator
             </li>
-            <li className="manage-li" onClick={() => setPage("userSchedule")}>
-              <i className="bi bi-calendar manage-icon"></i>Detalii programari
-            </li>
             <li className="manage-li" onClick={() => setPage("userManage")}>
               <i className="bi bi-person-vcard manage-icon"></i>Gestiune cont
+            </li>
+            <li className="manage-li" onClick={() => setPage("userSchedule")}>
+              <i className="bi bi-calendar manage-icon"></i>Detalii programari
             </li>
 
             <li className="manage-li li-break"></li>

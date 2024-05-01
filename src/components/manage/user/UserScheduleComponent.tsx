@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import ModalComponent from "../ModalComponent.tsx";
+import ModalComponent from "../../ModalComponent.tsx";
 
 interface Appointment {
   app_id: string;

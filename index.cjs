@@ -12,6 +12,7 @@ const jwt = require("jsonwebtoken")
 const users_model = require("./pg/usersModel.cjs");
 const locations_model = require("./pg/locationsModel.cjs");
 const appointments_model = require("./pg/appointmentsModel.cjs");
+const {response} = require("express");
 
 const app = express();
 const port = 3001;
@@ -73,6 +74,84 @@ app.post(`${path}/users/login`, (req, res) => {
     })
     .catch((error) => {
       res.status(500).send(error.message);
+    })
+})
+
+//get username
+app.get(`${path}/users/getUsername`, (req, res) => {
+  const userID = req.query.userID;
+  if(!userID) return res.status(400).send("Missing user parameter.");
+
+  users_model.getUsername(userID)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+//get email
+app.get(`${path}/users/getEmail`, (req, res) => {
+  const userID = req.query.userID;
+  if(!userID) return res.status(400).send("Missing user parameter.");
+
+  users_model.getEmail(userID)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+//set username
+app.post(`${path}/users/setUsername`, (req, res) => {
+  console.log(req.body);
+
+  const userID = req.body.userID;
+  const newUsername = req.body.name;
+
+  if(!userID || !newUsername) return res.status(400).send("Missing parameters.");
+
+  users_model.setUsername(userID, newUsername)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+//set email
+app.post(`${path}/users/setEmail`, (req, res) => {
+  const userID = req.body.userID;
+  const newEmail = req.body.newEmail;
+
+  if(!userID || !newEmail) return res.status(400).send("Missing parameters.");
+
+  users_model.setEmail(userID, newEmail)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+//set password
+app.post(`${path}/users/setPassword`, async (req, res) => {
+  const userID = req.body.userID;
+  const newPassword = req.body.newPassword;
+
+  if(!userID || !newPassword) return res.status(400).send("Missing parameters.");
+
+  users_model.setPassword(userID, newPassword)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
     })
 })
 

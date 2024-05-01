@@ -56,7 +56,105 @@ const loginUser = async (email, password) => {
   }
 }
 
+//functii pentru afisarea datelor utilizatorului logat
+const getUsername = async (user_id) => {
+  console.log(user_id);
+  try {
+    const user = await new Promise((resolve, reject) => {
+      pool.query("SELECT name FROM users WHERE user_id = $1", [user_id], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Nu s-a gasit numele utilizatorului. Esti logat?"))
+      })
+    })
+
+    if(user) return user;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Eroare la primirea utilizatorului, esti logat?")
+  }
+}
+
+const getEmail = async (user_id) => {
+  try {
+    const email = await new Promise((resolve, reject) => {
+      pool.query("SELECT email FROM users WHERE user_id = $1", [user_id], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Nu s-a gasit email-ul utilizatorului. Esti logat?"))
+      })
+    })
+
+    if(email) return email;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Eroare la primirea utilizatorului, esti logat?")
+  }
+}
+
+//functii pentru modificarea datelor utilizatorului
+const setUsername = async (user_id, new_username) => {
+  try {
+    const user = await new Promise((resolve, reject) => {
+      pool.query(`UPDATE users SET name = $1 WHERE user_id = $2`, [new_username, user_id], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Nu s-a gasit utilizatorul. Esti logat?"))
+      })
+    })
+  } catch (error) {
+    console.error(error);
+    throw new Error("Eroare la primirea utilizatorului, esti logat?")
+  }
+}
+
+const setEmail = async (user_id, new_email) => {
+  try {
+    const email = await new Promise((resolve, reject) => {
+      pool.query(`UPDATE users SET email = $1 WHERE user_id = $2`, [new_email, user_id], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Nu s-a gasit utilizatorul. Esti logat?"))
+      })
+    })
+  } catch (error) {
+    console.error(error);
+    throw new Error("Eroare la primirea utilizatorului, esti logat?")
+  }
+}
+
+const setPassword = async (user_id, new_password) => {
+  try{
+    const validation = await new Promise((resolve, reject) => {
+      pool.query(`SELECT password FROM users WHERE user_id = $1`, [user_id], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Nu s-a gasit utilizatorul."))
+      })
+    })
+
+    if(validation.password === new_password) {
+      throw new Error("Nu se poate introduce o parola veche");
+    }
+    const password = await new Promise((resolve, reject) => {
+      pool.query(`UPDATE users SET password = $1 WHERE user_id = $2`, [new_password, user_id], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Nu s-a gasit utilizatorul. Esti logat?"))
+      })
+    })
+  } catch (error) {
+    console.error(error);
+    throw new Error("Eroare la primirea utilizatorului, esti logat?")
+  }
+}
+
 module.exports = {
   createUser,
   loginUser,
+  getUsername,
+  getEmail,
+  setUsername,
+  setEmail,
+  setPassword
 };
