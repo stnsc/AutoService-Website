@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import ModalComponent from "../../ModalComponent.tsx";
 
 interface Appointment {
-  app_id: string;
+  app_id: number;
   name: string;
   address: string;
   app_date: string;
@@ -27,7 +27,11 @@ export default function UserScheduleComponent() {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(`HTTP Error. Status: ${response.status}`);
+        return response.json();
+      })
       .then((result) => setAppointments(result))
       .catch((error) => {
         //in cazul in care nu s-a putut primi cu succes datele, se afiseaza o eroare

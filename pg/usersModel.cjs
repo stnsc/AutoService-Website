@@ -125,17 +125,6 @@ const setEmail = async (user_id, new_email) => {
 
 const setPassword = async (user_id, new_password) => {
   try{
-    const validation = await new Promise((resolve, reject) => {
-      pool.query(`SELECT password FROM users WHERE user_id = $1`, [user_id], (error, results) => {
-        if(error) reject(error);
-        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
-        else reject(new Error("Nu s-a gasit utilizatorul."))
-      })
-    })
-
-    if(validation.password === new_password) {
-      throw new Error("Nu se poate introduce o parola veche");
-    }
     const password = await new Promise((resolve, reject) => {
       pool.query(`UPDATE users SET password = $1 WHERE user_id = $2`, [new_password, user_id], (error, results) => {
         if(error) reject(error);

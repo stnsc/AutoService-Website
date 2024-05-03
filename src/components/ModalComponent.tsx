@@ -19,7 +19,7 @@ export default function ModalComponent({ children, onClose }) {
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="modal-content bg-primary white-label"
+          className="modal-content white-label"
           initial={{ scale: 0.7 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.7 }}
