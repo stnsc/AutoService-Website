@@ -357,6 +357,56 @@ body {
     }
 }
 
+.contact-center{
+    display: flex;
+    justify-content: center;
+
+    align-items: flex-start;
+    margin: 2em;
+
+    .contact-div{
+        display: flex;
+        flex-direction: column;
+        width: 80vh;
+        padding: 2em;
+        background-color: rgba(154, 229, 203, 0.3);
+        border-radius: 2em;
+        margin: 2em;
+
+        h3{
+            background: rgba(0, 0, 0, 0.15);
+            padding: .3em;
+            border-radius: .5em;
+            width: 30vh;
+            text-align: center;
+        }
+
+        .form-control{
+            margin: 1em 0 1em 0;
+        }
+    }
+
+    .past-tickets-div{
+        display: flex;
+        flex-direction: column;
+
+        .ticket-index{
+            display: flex;
+            margin-top: .5em;
+            margin-bottom: .5em;
+            padding: 1em;
+            background-color: rgba(0,0,0,0.15);
+            justify-content: space-between;
+            border-radius: 1em;
+        }
+
+        .ticket-index:hover{
+            background-color: rgba(0,0,0,0.20);
+            cursor: pointer;
+        }
+    }
+}
+
 
 
 
