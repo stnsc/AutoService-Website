@@ -6,18 +6,24 @@
  * si un toggle de Dark Mode
  * */
 
-export default function Footer() {
-  function handleChange() {
-    const { checked: darkModeValue } = document.getElementById(
-      "flexSwitchCheckDefault",
-    );
+import { useEffect, useState } from "react";
 
-    if (darkModeValue) {
+export default function Footer() {
+  const [darkMode, setDarkMode] = useState(true);
+
+  function handleChange(e: {
+    target: { checked: boolean | ((prevState: boolean) => boolean) };
+  }) {
+    setDarkMode(e.target.checked);
+  }
+
+  useEffect(() => {
+    if (darkMode) {
       document.documentElement.setAttribute("data-bs-theme", "dark");
     } else {
       document.documentElement.setAttribute("data-bs-theme", "light");
     }
-  }
+  }, [darkMode]);
 
   return (
     <>
@@ -29,16 +35,14 @@ export default function Footer() {
               Stănescu Vlăduț-George
             </a>
           </p>
-          <form
-            method="post"
-            className="form-check form-switch"
-            onChange={handleChange}
-          >
+          <form method="post" className="form-check form-switch">
             <input
               className="form-check-input dark-mode-toggle"
               type="checkbox"
               role="switch"
               id="flexSwitchCheckDefault"
+              onChange={handleChange}
+              checked={darkMode}
             />
           </form>
         </div>
