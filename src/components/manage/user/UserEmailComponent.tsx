@@ -40,7 +40,7 @@ export default function UserEmailComponent() {
     }
 
     //modificarea numelui
-    fetch(`http://localhost:3001/api/users/setEmail`, {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/users/setEmail`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,12 +64,15 @@ export default function UserEmailComponent() {
   useEffect(() => {
     if (userID) {
       setUserID(localStorage.getItem("user_id") as string);
-      fetch(`http://localhost:3001/api/users/getEmail?userID=${userID}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+      fetch(
+        `http://${import.meta.env.VITE_HOST_IP}:3001/api/users/getEmail?userID=${userID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      })
+      )
         .then((response) => response.json())
         .then((result) => setEmail(result))
         .catch((error) => {

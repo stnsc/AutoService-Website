@@ -33,12 +33,15 @@ export default function ContactPage() {
     return str.substring(0, 20);
   }
   function getTickets() {
-    fetch(`http://localhost:3001/api/tickets/user?userID=${userID}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      `http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/user?userID=${userID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    })
+    )
       .then((response) => {
         if (!response.ok)
           throw new Error(`HTTP Error. Status: ${response.status}`);
@@ -64,7 +67,7 @@ export default function ContactPage() {
       return;
     }
 
-    fetch("http://localhost:3001/api/tickets/add", {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +88,7 @@ export default function ContactPage() {
   //functie pentru stergerea unui tichet
   const [ticketID, setTicketID] = useState();
   function handleTicketDeletion() {
-    fetch("http://localhost:3001/api/tickets/delete", {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/delete`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +127,7 @@ export default function ContactPage() {
     });
     setInputValue("");
 
-    fetch("http://localhost:3001/api/tickets/addChat", {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/addChat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -139,12 +142,15 @@ export default function ContactPage() {
   //functie pentru a prelua toate mesajele dintr-un tichet
   const [chats, setChats] = useState([]);
   function handleChatRetrieval(ticket_id: number) {
-    fetch(`http://localhost:3001/api/tickets/getChats?ticketID=${ticket_id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      `http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/getChats?ticketID=${ticket_id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    })
+    )
       .then((response) => {
         return response.json();
       })

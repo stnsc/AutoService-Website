@@ -10,7 +10,7 @@ export default function DatabaseDebugPage() {
   const [users, setUsers] = useState([]);
 
   function getUsers() {
-    fetch("http://localhost:3001/api/users")
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/users`)
       .then((response) => response.json())
       .then((result) => setUsers(result))
       .catch((error) => console.error("Error fetching: " + error));

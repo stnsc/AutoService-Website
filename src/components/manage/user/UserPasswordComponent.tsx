@@ -32,7 +32,7 @@ export default function UserPasswordComponent() {
       return;
     }
 
-    fetch(`http://localhost:3001/api/users/setPassword`, {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/users/setPassword`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

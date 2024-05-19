@@ -61,7 +61,7 @@ export default function SignUpForm() {
     }
 
     //fetch request-ul pentru a trimite datele in baza de date "users"
-    fetch("http://localhost:3001/api/users/create", {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/users/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

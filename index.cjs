@@ -46,6 +46,11 @@ function generateToken(id){
 * Un status code de 500, daca request-ul nu s-a executat
 * */
 
+//network testing
+app.get('/', (req, res) => {
+  res.send(`Connected successfully to port ${port}`);
+})
+
 /* USERS */
 // create user
 app.post(`${path}/users/create`, (req, res) => {
@@ -277,6 +282,6 @@ app.get(`${path}/tickets/getChats`, (req, res) => {
     })
 })
 
-app.listen(port, () => {
+app.listen(port, process.env.VITE_HOST_IP, () => {
   console.log(`App Running on Port ${port}.`);
 });

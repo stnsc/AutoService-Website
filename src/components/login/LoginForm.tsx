@@ -53,7 +53,7 @@ export default function LoginForm() {
     }
 
     //fetch request pentru a trimite datele din form in baza de date
-    fetch("http://localhost:3001/api/users/login", {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -43,7 +43,7 @@ export default function UserNameComponent() {
     }
 
     //modificarea numelui
-    fetch(`http://localhost:3001/api/users/setUsername`, {
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/users/setUsername`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,12 +67,15 @@ export default function UserNameComponent() {
   }, []);
   useEffect(() => {
     if (userID) {
-      fetch(`http://localhost:3001/api/users/getUsername?userID=${userID}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+      fetch(
+        `http://${import.meta.env.VITE_HOST_IP}:3001/api/users/getUsername?userID=${userID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      })
+      )
         .then((response) => response.json())
         .then((result) => setUsername(result))
         .catch((error) => {

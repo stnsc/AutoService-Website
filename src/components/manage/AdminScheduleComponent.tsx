@@ -22,7 +22,7 @@ export default function AdminScheduleComponent() {
   const [loading, showLoading] = useState(true);
 
   function getAppointments() {
-    fetch("http://localhost:3001/api/appointments/getAll")
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/appointments/getAll`)
       .then((response) => {
         if (!response.ok)
           throw new Error(`HTTP Error. Status: ${response.status}`);
@@ -39,13 +39,16 @@ export default function AdminScheduleComponent() {
   }
 
   function handleDelete() {
-    fetch("http://localhost:3001/api/appointments/delete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      `http://${import.meta.env.VITE_HOST_IP}:3001/api/appointments/delete`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ appID }),
       },
-      body: JSON.stringify({ appID }),
-    }).then((response) => {
+    ).then((response) => {
       getAppointments();
       return response.json();
     });

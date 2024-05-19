@@ -47,7 +47,7 @@ export default function LocatiiPage() {
   //fetch request pentru a arata toate locatiile in
   //baza de date "locations"
   function getLocations() {
-    fetch("http://localhost:3001/api/locations")
+    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/locations`)
       .then((response) => response.json())
       .then((result) => setLocations(result))
       .catch((error) => console.error("Error fetching: " + error));
@@ -74,14 +74,22 @@ export default function LocatiiPage() {
     }
 
     //fetch request pentru a trimte datele date de utilizator
-    fetch("http://localhost:3001/api/appointments/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      `http://${import.meta.env.VITE_HOST_IP}:3001/api/appointments/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        //parametrii sunt dati intr-un format json
+        body: JSON.stringify({
+          locationID: data[1],
+          userID,
+          dateTime,
+          details,
+        }),
       },
-      //parametrii sunt dati intr-un format json
-      body: JSON.stringify({ locationID: data[1], userID, dateTime, details }),
-    })
+    )
       .then(async (response) => {
         switch (response.status) {
           //daca request-ul s-a executat cu success
