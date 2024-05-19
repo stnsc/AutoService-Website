@@ -31,6 +31,7 @@ const createTicket = (body) => {
   })
 }
 
+//functie pentru a prelua tichetele create de un utilizator
 const getTicketUser = (body) => {
   try{
     return new Promise(function (resolve, reject) {
@@ -48,7 +49,50 @@ const getTicketUser = (body) => {
   }
 }
 
+//functie care sterge tichetul unui utilizator
+const deleteTicket = (body) => {
+  return new Promise((resolve, reject) => {
+    pool.query("DELETE FROM ticketrepository WHERE ticket_id = $1", [body.ticketID], (error, results) => {
+      if (error) reject(error);
+      if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+      else reject(new Error("Nu s-a putut sterge tichetul."))
+    })
+  })
+}
+
+//functie pentru adaugarea unui chat intr-un tichet
+const addChat = (body) => {
+  const date = new Date();
+  const date_day = date.toDateString();
+  const date_timestamp = date.getHours() + ":" + date.getMinutes();
+  const date_unix = Math.floor(date.getTime() / 1000);
+  return new Promise((resolve, reject) => {
+    pool.query(`INSERT INTO ticketchats
+                VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [body.ticketID, body.userID, body.name, body.inputValue, date_day, date_timestamp, date_unix],
+      (error, results) => {
+        if (error) reject(error);
+        if (results && results.rows && results.rows.length > 0) resolve(results.rows);
+        else reject(new Error("Nu s-a putut trimite mesajul."));
+      })
+  })
+}
+
+const getChatsFromTicket = (body) => {
+  console.log(body);
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT * FROM ticketchats WHERE ticket_id = $1`, [body], (error, results) => {
+      if (error) reject(error);
+      if (results && results.rows && results.rows.length > 0) resolve(results.rows);
+      else reject(new Error("Nu s-au prelua mesajele din acest tichet."));
+    })
+  })
+}
+
 module.exports = {
   createTicket,
-  getTicketUser
+  getTicketUser,
+  deleteTicket,
+  addChat,
+  getChatsFromTicket
 }

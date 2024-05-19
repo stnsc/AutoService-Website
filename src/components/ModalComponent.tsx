@@ -24,7 +24,7 @@ export default function ModalComponent({ children, onClose }) {
           animate={{ scale: 1 }}
           exit={{ scale: 0.7 }}
           transition={{
-            ease: [0.825, 0.15, 0.265, 0.81],
+            ease: [0.3, 0.15, 0.265, 0.81],
             duration: 0.5,
           }}
         >
