@@ -22,7 +22,7 @@ export default function ContactPage() {
 
   const [tickets, setTickets] = useState([]);
 
-  const [userID, setUserID] = useState();
+  const [userID, setUserID] = useState("");
   const [name, setName] = useState("");
   const [logged, isLogged] = useState(false);
 
@@ -86,7 +86,7 @@ export default function ContactPage() {
   }
 
   //functie pentru stergerea unui tichet
-  const [ticketID, setTicketID] = useState();
+  const [ticketID, setTicketID] = useState(0);
   function handleTicketDeletion() {
     fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/delete`, {
       method: "POST",
@@ -156,7 +156,6 @@ export default function ContactPage() {
       })
       .then((result) => {
         setChats(result);
-        console.log(chats);
       })
       .catch((error) => {
         console.error("Error fetching: " + error);
@@ -278,39 +277,43 @@ export default function ContactPage() {
               <h3 className="chat-ticket-title">"{data[1]}"</h3>
               <div className="chat-box">
                 <div className="chat-scroll" ref={scrollRef}>
-                  {chats.map(
-                    ({
-                      user_id,
-                      name,
-                      message,
-                      date_day,
-                      date_timestamp,
-                    }: Chat) => (
-                      <>
-                        {user_id == userID && (
-                          <div className="right-side">
-                            <div className="right-message">
-                              <h5 className="name">{name}</h5>
-                              <p>{message}</p>
-                              <p className="date-timestamp">
-                                {date_day}, {date_timestamp}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-                        {user_id != userID && (
-                          <div className="left-side">
-                            <div className="left-message">
-                              <h5 className="name">{name}</h5>
-                              <p>{message}</p>
-                              <p className="date-timestamp">
-                                {date_day}, {date_timestamp}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    ),
+                  {chats.length > 0 && (
+                    <>
+                      {chats.map(
+                        ({
+                          user_id,
+                          name,
+                          message,
+                          date_day,
+                          date_timestamp,
+                        }: Chat) => (
+                          <>
+                            {user_id == userID && (
+                              <div className="right-side">
+                                <div className="right-message">
+                                  <h5 className="name">{name}</h5>
+                                  <p>{message}</p>
+                                  <p className="date-timestamp">
+                                    {date_day}, {date_timestamp}
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                            {user_id != userID && (
+                              <div className="left-side">
+                                <div className="left-message">
+                                  <h5 className="name">{name}</h5>
+                                  <p>{message}</p>
+                                  <p className="date-timestamp">
+                                    {date_day}, {date_timestamp}
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        ),
+                      )}
+                    </>
                   )}
                 </div>
                 <div className="chat-input">

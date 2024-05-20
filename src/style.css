@@ -394,32 +394,45 @@ body {
         align-items: center;
         text-align: center;
     }
+}
 
-    .past-tickets-div{
+.not-claimed{
+    background: rgba(255, 144, 144, 0.3);
+    padding: .5em;
+    border-radius: 1em;
+}
+
+.claimed{
+    background: rgba(144, 255, 146, 0.3);
+    padding: .5em;
+    border-radius: 1em;
+}
+
+.past-tickets-div{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+
+    .ticket-index{
         display: flex;
-        flex-direction: column;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        padding: 1em;
+        background-color: rgba(0,0,0,0.15);
+        justify-content: space-between;
+        border-radius: 1em;
 
-        .ticket-index{
+        .ticket-details{
             display: flex;
-            margin-top: .5em;
-            margin-bottom: .5em;
-            padding: 1em;
-            background-color: rgba(0,0,0,0.15);
-            justify-content: space-between;
-            border-radius: 1em;
-
-            .ticket-details{
-                display: flex;
-                flex-direction: column;
-                text-overflow: ellipsis;
-            }
-
+            flex-direction: column;
+            text-overflow: ellipsis;
         }
 
-        .ticket-index:hover{
-            background-color: rgba(0,0,0,0.20);
-            cursor: pointer;
-        }
+    }
+
+    .ticket-index:hover{
+        background-color: rgba(0,0,0,0.20);
+        cursor: pointer;
     }
 }
 
@@ -445,6 +458,19 @@ body {
             background-color: rgba(255, 0, 0, 0.6);
             cursor: pointer;
         }
+
+        .chat-ticket-claim{
+            background-color: rgba(0, 255, 149, 0.3);
+            width: 15vh;
+            text-align: center;
+            border-radius: 1em;
+            margin-left: 1em;
+        }
+        .chat-ticket-claim:hover{
+            background-color: rgba(0, 255, 149, 0.6);
+            cursor: pointer;
+        }
+
     }
 
     .chat-ticket-title{

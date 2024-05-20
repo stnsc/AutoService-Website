@@ -49,13 +49,51 @@ const getTicketUser = (body) => {
   }
 }
 
+//functie pentru a prelua toate tichetele (admin)
+const getAllTickets = () => {
+  try{
+    return new Promise(function (resolve, reject) {
+      pool.query(`SELECT * FROM ticketrepository`, (error, results) => {
+        if (error) reject(error);
+        if (results && results.rows && results.rows.length > 0) resolve(results.rows);
+        else reject(new Error("Nu s-au gasit tichete."));
+      })
+    })
+  } catch (err) {
+    console.error(err);
+    throw new Error("Eroare Server Intern, Tichete");
+  }
+}
+
 //functie care sterge tichetul unui utilizator
-const deleteTicket = (body) => {
+const deleteTicket = async (body) => {
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN');
+
+    const deleteChats = await client.query("DELETE FROM ticketchats WHERE ticket_id = $1 RETURNING *", [body.ticketID]);
+
+    const deleteTicket = await client.query("DELETE FROM ticketrepository WHERE ticket_id = $1", [body.ticketID]);
+
+    await client.query('COMMIT');
+    return deleteTicket.rows[0];
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+//functie pentru a prelua un tichet al unui admin
+const claimTicket = (body) => {
+  console.log(body);
   return new Promise((resolve, reject) => {
-    pool.query("DELETE FROM ticketrepository WHERE ticket_id = $1", [body.ticketID], (error, results) => {
+    pool.query(`UPDATE ticketrepository SET admin_id = $1 WHERE ticket_id = $2`, [body.userID, body.ticketID], (error, results) => {
       if (error) reject(error);
-      if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
-      else reject(new Error("Nu s-a putut sterge tichetul."))
+      if (results && results.rows && results.rows.length > 0) resolve(results.rows);
+      else reject(new Error("Nu s-a putut prelua tichetul."));
     })
   })
 }
@@ -92,7 +130,9 @@ const getChatsFromTicket = (body) => {
 module.exports = {
   createTicket,
   getTicketUser,
+  getAllTickets,
   deleteTicket,
+  claimTicket,
   addChat,
   getChatsFromTicket
 }

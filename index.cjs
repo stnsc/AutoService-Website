@@ -247,6 +247,17 @@ app.get(`${path}/tickets/user`, (req, res) => {
     })
 })
 
+//get all tickets (admin command)
+app.get(`${path}/tickets/all`, (req, res) => {
+  ticket_model.getAllTickets()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
 //delete ticket
 app.post(`${path}/tickets/delete`, (req, res) => {
   ticket_model.deleteTicket(req.body)
@@ -269,11 +280,23 @@ app.post(`${path}/tickets/addChat`, (req, res) => {
     })
 })
 
+//get all chat messages from a ticket
 app.get(`${path}/tickets/getChats`, (req, res) => {
   const ticketID = req.query.ticketID;
   if(!ticketID) return res.status(400).send("Missing user parameter.")
 
   ticket_model.getChatsFromTicket(ticketID)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+//claim a ticket
+app.post(`${path}/tickets/claim`, (req, res) => {
+  ticket_model.claimTicket(req.body)
     .then(response => {
       res.status(200).send(response);
     })
