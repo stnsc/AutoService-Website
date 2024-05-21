@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import HeroTitle from "../components/HeroTitle.tsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ModalComponent from "../components/ModalComponent.tsx";
+import ChatBox from "../components/ChatBox.tsx";
 
 interface Ticket {
   ticket_id: number;
@@ -9,20 +10,12 @@ interface Ticket {
   message: string;
 }
 
-interface Chat {
-  user_id: number;
-  name: string;
-  message: string;
-  date_day: string;
-  date_timestamp: string;
-}
-
 export default function ContactPage() {
   const isPresent = useIsPresent();
 
   const [tickets, setTickets] = useState([]);
 
-  const [userID, setUserID] = useState("");
+  const [userID, setUserID] = useState(0);
   const [name, setName] = useState("");
   const [logged, isLogged] = useState(false);
 
@@ -85,91 +78,15 @@ export default function ContactPage() {
     console.log(data, userID);
   }
 
-  //functie pentru stergerea unui tichet
-  const [ticketID, setTicketID] = useState(0);
-  function handleTicketDeletion() {
-    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/delete`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ticketID }),
-    }).then((response) => {
-      getTickets();
-      return response.json();
-    });
-
-    setModalOpen(false);
-  }
-
   //functie care verifica logarea utilizatorului
   useEffect(() => {
-    setUserID(localStorage.getItem("user_id") as string);
+    setUserID(Number(localStorage.getItem("user_id")));
     setName(localStorage.getItem("name") as string);
     if (userID) {
       isLogged(true);
       getTickets();
     }
   }, [userID]);
-
-  //functii pentru trimiterea unui mesaj
-  const [inputValue, setInputValue] = useState("");
-  function handleInputChange(e) {
-    setInputValue(e.target.value);
-  }
-
-  function handleInputSend() {
-    const data = JSON.stringify({
-      ticketID,
-      userID,
-      name,
-      inputValue,
-    });
-    setInputValue("");
-
-    fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/addChat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: data,
-    }).then((response) => {
-      handleChatRetrieval(ticketID);
-      return response.json();
-    });
-  }
-
-  //functie pentru a prelua toate mesajele dintr-un tichet
-  const [chats, setChats] = useState([]);
-  function handleChatRetrieval(ticket_id: number) {
-    fetch(
-      `http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/getChats?ticketID=${ticket_id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        setChats(result);
-      })
-      .catch((error) => {
-        console.error("Error fetching: " + error);
-      });
-  }
-
-  //auto scroll
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [chats]);
 
   return (
     <>
@@ -239,8 +156,6 @@ export default function ContactPage() {
                   onClick={() => {
                     setModalOpen(true);
                     setData([ticket_id, subject]);
-                    setTicketID(ticket_id);
-                    handleChatRetrieval(ticket_id);
                   }}
                 >
                   <div className="ticket-details">
@@ -264,71 +179,14 @@ export default function ContactPage() {
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isModalOpen && (
           <ModalComponent onClose={() => setModalOpen(false)}>
-            <div className="chat-window">
-              <div className="chat-info-column">
-                <h5 className="chat-ticket-number">Tichetul nr. {data[0]}</h5>
-                <h5
-                  className="chat-ticket-delete"
-                  onClick={handleTicketDeletion}
-                >
-                  Sterge
-                </h5>
-              </div>
-              <h3 className="chat-ticket-title">"{data[1]}"</h3>
-              <div className="chat-box">
-                <div className="chat-scroll" ref={scrollRef}>
-                  {chats.length > 0 && (
-                    <>
-                      {chats.map(
-                        ({
-                          user_id,
-                          name,
-                          message,
-                          date_day,
-                          date_timestamp,
-                        }: Chat) => (
-                          <>
-                            {user_id == userID && (
-                              <div className="right-side">
-                                <div className="right-message">
-                                  <h5 className="name">{name}</h5>
-                                  <p>{message}</p>
-                                  <p className="date-timestamp">
-                                    {date_day}, {date_timestamp}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                            {user_id != userID && (
-                              <div className="left-side">
-                                <div className="left-message">
-                                  <h5 className="name">{name}</h5>
-                                  <p>{message}</p>
-                                  <p className="date-timestamp">
-                                    {date_day}, {date_timestamp}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                          </>
-                        ),
-                      )}
-                    </>
-                  )}
-                </div>
-                <div className="chat-input">
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                  />
-                  <i
-                    className="bi bi-arrow-right chat-send"
-                    onClick={handleInputSend}
-                  ></i>
-                </div>
-              </div>
-            </div>
+            <ChatBox
+              ticket_id={data[0]}
+              title={data[1]}
+              logged_user_id={userID}
+              name={name}
+              is_admin={false}
+              dismiss={() => console.log()}
+            />
           </ModalComponent>
         )}
       </AnimatePresence>

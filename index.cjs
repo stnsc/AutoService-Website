@@ -258,19 +258,10 @@ app.get(`${path}/tickets/all`, (req, res) => {
     })
 })
 
-//delete ticket
-app.post(`${path}/tickets/delete`, (req, res) => {
-  ticket_model.deleteTicket(req.body)
-    .then(response => {
-      res.status(200).send(response);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    })
-})
 
 //add chat message
 app.post(`${path}/tickets/addChat`, (req, res) => {
+  console.log(req.body);
   ticket_model.addChat(req.body)
     .then(response => {
       res.status(200).send(response);

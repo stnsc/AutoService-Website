@@ -65,32 +65,12 @@ const getAllTickets = () => {
   }
 }
 
-//functie care sterge tichetul unui utilizator
-const deleteTicket = async (body) => {
-  const client = await pool.connect();
-
-  try {
-    await client.query('BEGIN');
-
-    const deleteChats = await client.query("DELETE FROM ticketchats WHERE ticket_id = $1 RETURNING *", [body.ticketID]);
-
-    const deleteTicket = await client.query("DELETE FROM ticketrepository WHERE ticket_id = $1", [body.ticketID]);
-
-    await client.query('COMMIT');
-    return deleteTicket.rows[0];
-  } catch (error) {
-    await client.query('ROLLBACK');
-    throw error;
-  } finally {
-    client.release();
-  }
-}
 
 //functie pentru a prelua un tichet al unui admin
 const claimTicket = (body) => {
   console.log(body);
   return new Promise((resolve, reject) => {
-    pool.query(`UPDATE ticketrepository SET admin_id = $1 WHERE ticket_id = $2`, [body.userID, body.ticketID], (error, results) => {
+    pool.query(`UPDATE ticketrepository SET admin_id = $1 WHERE ticket_id = $2`, [body.logged_user_id, body.ticket_id], (error, results) => {
       if (error) reject(error);
       if (results && results.rows && results.rows.length > 0) resolve(results.rows);
       else reject(new Error("Nu s-a putut prelua tichetul."));
@@ -107,7 +87,7 @@ const addChat = (body) => {
   return new Promise((resolve, reject) => {
     pool.query(`INSERT INTO ticketchats
                 VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-      [body.ticketID, body.userID, body.name, body.inputValue, date_day, date_timestamp, date_unix],
+      [body.ticket_id, body.logged_user_id, body.name, body.inputValue, date_day, date_timestamp, date_unix],
       (error, results) => {
         if (error) reject(error);
         if (results && results.rows && results.rows.length > 0) resolve(results.rows);
@@ -131,7 +111,6 @@ module.exports = {
   createTicket,
   getTicketUser,
   getAllTickets,
-  deleteTicket,
   claimTicket,
   addChat,
   getChatsFromTicket
