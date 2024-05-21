@@ -16,6 +16,9 @@ export default function AdminContactComponent() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [data, setData] = useState([]);
 
+  //variabile pentru afisarea progresului de preluare a datelor din baza de date
+  const [loading, showLoading] = useState(true);
+
   function getTickets() {
     fetch(`http://${import.meta.env.VITE_HOST_IP}:3001/api/tickets/all`, {
       method: "GET",
@@ -31,6 +34,9 @@ export default function AdminContactComponent() {
       .then((result) => setTickets(result))
       .catch((error) => {
         console.error("Error fetching: " + error);
+      })
+      .finally(() => {
+        showLoading(false);
       });
   }
 
@@ -50,6 +56,21 @@ export default function AdminContactComponent() {
   return (
     <>
       <div className="past-tickets-div">
+        <div className="information-warning">
+          <h4>
+            <i className="bi bi-exclamation-diamond"></i> In cazul in care nu se
+            afiseaza nimic, toate tichetele au fost preluate de alti
+            administratori!
+          </h4>
+        </div>
+        {loading && (
+          <div className="information-fetch">
+            <h1>
+              <i className="bi bi-arrow-clockwise"></i>
+            </h1>
+            <h2>Se incarca...</h2>
+          </div>
+        )}
         {tickets.map(({ ticket_id, subject, message, admin_id }: Ticket) => (
           <>
             {admin_id == null && (
