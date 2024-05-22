@@ -164,12 +164,36 @@ app.post(`${path}/users/setPassword`, async (req, res) => {
 //get locations
 app.get(`${path}/locations`, (req, res) => {
   locations_model.getLocations()
-  .then(response => {
-    res.status(200).send(response);
-  })
-  .catch(error => {
-    res.status(500).send(error);
-  })
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+//add location
+app.post(`${path}/locations/add`, (req, res) => {
+  console.log(req.body);
+  locations_model.addLocation(req.body)
+    .then(response => {
+      res.status(200).send(response)
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+
+//delete location
+app.post(`${path}/locations/delete`, (req, res) => {
+  locations_model.deleteLocation(req.body)
+    .then(response => {
+      res.status(200).send(response)
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
 })
 
 /* APPOINTMENTS */
@@ -295,6 +319,7 @@ app.post(`${path}/tickets/claim`, (req, res) => {
       res.status(500).send(error);
     })
 })
+
 
 app.listen(port, process.env.VITE_HOST_IP, () => {
   console.log(`App Running on Port ${port}.`);
