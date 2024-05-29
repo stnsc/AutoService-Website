@@ -6,7 +6,6 @@ import LocatiiPage from "./pages/LocatiiPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import { AnimatePresence } from "framer-motion";
-import DatabaseDebugPage from "./pages/DatabaseDebugPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import ManagePage from "./pages/ManagePage.tsx";
 
@@ -37,10 +36,6 @@ export default function App() {
     {
       path: "/manage",
       element: <ManagePage />,
-    },
-    {
-      path: "/db",
-      element: <DatabaseDebugPage />,
     },
     //elementul "*" duce la pagina 404 daca nu gaseste un link specificat mai sus
     {

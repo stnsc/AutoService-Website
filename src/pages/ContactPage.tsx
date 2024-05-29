@@ -71,11 +71,9 @@ export default function ContactPage() {
         return response.text();
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       })
       .finally(() => getTickets());
-
-    console.log(data, userID);
   }
 
   //functie care verifica logarea utilizatorului

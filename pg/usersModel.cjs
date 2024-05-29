@@ -48,7 +48,7 @@ const loginUser = async (email, password) => {
     if(user.password === password) {
       const {user_id, name, email} = user;
       return {user_id, name, email, message: "Logat cu succes!"};
-    } else throw new Error("Parola incorecta.");
+    } else new Error("Parola incorecta.");
 
   } catch (error) {
     console.error(error);
@@ -58,7 +58,6 @@ const loginUser = async (email, password) => {
 
 //functii pentru afisarea datelor utilizatorului logat
 const getUsername = async (user_id) => {
-  console.log(user_id);
   try {
     const user = await new Promise((resolve, reject) => {
       pool.query("SELECT name FROM users WHERE user_id = $1", [user_id], (error, results) => {
@@ -95,7 +94,7 @@ const getEmail = async (user_id) => {
 //functii pentru modificarea datelor utilizatorului
 const setUsername = async (user_id, new_username) => {
   try {
-    const user = await new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       pool.query(`UPDATE users SET name = $1 WHERE user_id = $2`, [new_username, user_id], (error, results) => {
         if(error) reject(error);
         if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
@@ -110,7 +109,7 @@ const setUsername = async (user_id, new_username) => {
 
 const setEmail = async (user_id, new_email) => {
   try {
-    const email = await new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       pool.query(`UPDATE users SET email = $1 WHERE user_id = $2`, [new_email, user_id], (error, results) => {
         if(error) reject(error);
         if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
@@ -125,7 +124,7 @@ const setEmail = async (user_id, new_email) => {
 
 const setPassword = async (user_id, new_password) => {
   try{
-    const password = await new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       pool.query(`UPDATE users SET password = $1 WHERE user_id = $2`, [new_password, user_id], (error, results) => {
         if(error) reject(error);
         if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
@@ -138,6 +137,23 @@ const setPassword = async (user_id, new_password) => {
   }
 }
 
+//functie pentru a vedea daca utilizatorul este un administrator
+const getIsAdmin = async (user_id) => {
+  try{
+    return await new Promise((resolve, reject) => {
+      pool.query(`SELECT is_admin FROM users WHERE user_id = $1`, [user_id], (error, results) => {
+        if(error) reject(error);
+        if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+        else reject(new Error("Nu s-a gasit utilizatorul. Esti logat?"))
+      })
+    })
+
+  } catch (error) {
+    console.error(error);
+    throw new Error("Eroare la verificarea utilizatorului.")
+  }
+}
+
 module.exports = {
   createUser,
   loginUser,
@@ -145,5 +161,6 @@ module.exports = {
   getEmail,
   setUsername,
   setEmail,
-  setPassword
+  setPassword,
+  getIsAdmin
 };

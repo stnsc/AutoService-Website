@@ -33,8 +33,6 @@ export default function UserNameComponent() {
       return;
     }
 
-    console.log(`name: ${name} | username: ${username.name}`);
-
     if (name === username.name) {
       setShowAlert(true);
       setErr(1);

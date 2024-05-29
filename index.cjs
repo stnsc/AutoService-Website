@@ -69,11 +69,7 @@ app.post(`${path}/users/login`, (req, res) => {
 
   users_model.loginUser(email, password)
     .then((response) => {
-      console.log(response);
-
       const token = generateToken(response.user_id);
-
-      console.log(token);
 
       res.status(200).json({message: response, token, name: response.name, id: response.user_id});
     })
@@ -112,8 +108,6 @@ app.get(`${path}/users/getEmail`, (req, res) => {
 
 //set username
 app.post(`${path}/users/setUsername`, (req, res) => {
-  console.log(req.body);
-
   const userID = req.body.userID;
   const newUsername = req.body.name;
 
@@ -160,6 +154,20 @@ app.post(`${path}/users/setPassword`, async (req, res) => {
     })
 })
 
+//get admin rights
+app.get(`${path}/users/isAdmin`, (req, res) => {
+  const userID = req.query.userID;
+  if(!userID) return res.status(400).send("Missing user parameter.");
+
+  users_model.getIsAdmin(userID)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
 /* LOCATIONS */
 //get locations
 app.get(`${path}/locations`, (req, res) => {
@@ -174,7 +182,6 @@ app.get(`${path}/locations`, (req, res) => {
 
 //add location
 app.post(`${path}/locations/add`, (req, res) => {
-  console.log(req.body);
   locations_model.addLocation(req.body)
     .then(response => {
       res.status(200).send(response)
@@ -285,7 +292,6 @@ app.get(`${path}/tickets/all`, (req, res) => {
 
 //add chat message
 app.post(`${path}/tickets/addChat`, (req, res) => {
-  console.log(req.body);
   ticket_model.addChat(req.body)
     .then(response => {
       res.status(200).send(response);

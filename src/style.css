@@ -229,6 +229,22 @@ body {
     border-radius: 2em;
 }
 
+.username-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1em 0 1em;
+
+    .small-text{
+        font-size: small;
+        font-weight: bold;
+    }
+
+    p{
+        margin: 0;
+    }
+}
+
 .manage-container{
     display: flex;
     justify-content: space-between;

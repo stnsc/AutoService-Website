@@ -37,7 +37,6 @@ export default function AdminLocationComponent() {
     //validare form
     for (const key in data) {
       if (data[key] == "") {
-        console.log("Ceva nu a fost completat");
         return;
       }
     }

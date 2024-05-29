@@ -45,11 +45,8 @@ export default function UserPasswordComponent() {
         setType(1);
         return response.json();
       })
-      .then((result) => {
-        console.log(result);
-      })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 

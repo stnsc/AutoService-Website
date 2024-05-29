@@ -61,6 +61,34 @@ export default function Navbar() {
     window.location.reload();
   }
 
+  const [isAdmin, setIsAdmin] = useState(false);
+  function getAdmin() {
+    const userID = Number(localStorage.getItem("user_id"));
+
+    fetch(
+      `http://${import.meta.env.VITE_HOST_IP}:3001/api/users/isAdmin?userID=${userID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        if (result.is_admin == true) setIsAdmin(true);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  useEffect(() => {
+    getAdmin();
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-sm fixed-top">
       <div className="container-fluid">
@@ -109,7 +137,15 @@ export default function Navbar() {
         <div className="nav-user-info">
           {user && (
             <>
-              <p className="m-0 p-3">{`Buna, ${user}!`}</p>
+              <div className="username-details">
+                <p>{`Buna, ${user}!`}</p>
+                {isAdmin && (
+                  <p className="small-text">
+                    <i className="bi bi-person-gear"></i> Administrator
+                  </p>
+                )}
+              </div>
+
               <Link
                 to="/manage"
                 className={`${isActive === "Details" ? activeClass : inactiveClass} m-0 p-3`}

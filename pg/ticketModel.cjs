@@ -68,7 +68,6 @@ const getAllTickets = () => {
 
 //functie pentru a prelua un tichet al unui admin
 const claimTicket = (body) => {
-  console.log(body);
   return new Promise((resolve, reject) => {
     pool.query(`UPDATE ticketrepository SET admin_id = $1 WHERE ticket_id = $2`, [body.logged_user_id, body.ticket_id], (error, results) => {
       if (error) reject(error);
@@ -97,7 +96,6 @@ const addChat = (body) => {
 }
 
 const getChatsFromTicket = (body) => {
-  console.log(body);
   return new Promise((resolve, reject) => {
     pool.query(`SELECT * FROM ticketchats WHERE ticket_id = $1`, [body], (error, results) => {
       if (error) reject(error);

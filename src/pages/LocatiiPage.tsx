@@ -107,7 +107,7 @@ export default function LocatiiPage() {
         return response.text();
       })
       .catch((error) => {
-        console.log(error.text);
+        console.error(error.text);
       });
 
     setShowAlert(true);

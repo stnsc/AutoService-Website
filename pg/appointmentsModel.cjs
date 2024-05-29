@@ -71,7 +71,6 @@ const getAllAppointments = async () => {
 
 //comanda pentru a sterge o programare unui utilizator
 const deleteAppointment = async (body) => {
-    console.log(body.appID);
     return await new Promise((resolve, reject) => {
         pool.query("DELETE FROM appointments WHERE app_id = $1", [body.appID], (error, results) => {
             if (error) reject(error);
