@@ -17,7 +17,10 @@ export default function UserPasswordComponent() {
 
   const [userID, setUserID] = useState("");
 
-  function handlePasswordChange(e) {
+  function handlePasswordChange(e: {
+    preventDefault: () => void;
+    target: HTMLFormElement | undefined;
+  }) {
     e.preventDefault();
 
     const formData = new FormData(e.target);

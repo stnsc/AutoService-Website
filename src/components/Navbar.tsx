@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { useLocation } from "react-router";
 
 /*
  * Bara de navigatie
@@ -61,6 +62,11 @@ export default function Navbar() {
     window.location.reload();
   }
 
+  const location = useLocation();
+  function setActivePage() {
+    setActive(location.pathname);
+  }
+
   const [isAdmin, setIsAdmin] = useState(false);
   function getAdmin() {
     const userID = Number(localStorage.getItem("user_id"));
@@ -87,7 +93,8 @@ export default function Navbar() {
 
   useEffect(() => {
     getAdmin();
-  }, []);
+    setActivePage();
+  }, [setActivePage]);
 
   return (
     <nav className="navbar navbar-expand-sm fixed-top">
@@ -104,32 +111,32 @@ export default function Navbar() {
           */}
           <Link
             to="/"
-            className={`${isActive === "Acasa" ? activeClass : inactiveClass}`}
-            onClick={() => setActive("Acasa")}
+            className={`${isActive === "/" ? activeClass : inactiveClass}`}
+            onClick={setActivePage}
           >
             Acasa
           </Link>
 
           <Link
             to="/servicii"
-            className={`${isActive === "Servicii" ? activeClass : inactiveClass}`}
-            onClick={() => setActive("Servicii")}
+            className={`${isActive === "/servicii" ? activeClass : inactiveClass}`}
+            onClick={setActivePage}
           >
             Servicii
           </Link>
 
           <Link
             to="/locatii"
-            className={`${isActive === "Locatii" ? activeClass : inactiveClass}`}
-            onClick={() => setActive("Locatii")}
+            className={`${isActive === "/locatii" ? activeClass : inactiveClass}`}
+            onClick={setActivePage}
           >
             Locatii
           </Link>
 
           <Link
             to="/contact"
-            className={`${isActive === "Contact" ? activeClass : inactiveClass}`}
-            onClick={() => setActive("Contact")}
+            className={`${isActive === "/contact" ? activeClass : inactiveClass}`}
+            onClick={setActivePage}
           >
             Contact
           </Link>
@@ -148,8 +155,8 @@ export default function Navbar() {
 
               <Link
                 to="/manage"
-                className={`${isActive === "Details" ? activeClass : inactiveClass} m-0 p-3`}
-                onClick={() => setActive("Details")}
+                className={`${isActive === "/manage" ? activeClass : inactiveClass} m-0 p-3`}
+                onClick={setActivePage}
               >
                 Detalii cont
               </Link>
@@ -165,8 +172,8 @@ export default function Navbar() {
           </p>
           <Link
             to="/login"
-            className={`${user ? "d-none" : ""} m-1 p-3 ${isActive === "Login" ? activeClass : inactiveClass}`}
-            onClick={() => setActive("Login")}
+            className={`${user ? "d-none" : ""} m-1 p-3 ${isActive === "/login" ? activeClass : inactiveClass}`}
+            onClick={setActivePage}
           >
             Login
           </Link>
