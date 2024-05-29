@@ -15,16 +15,7 @@ import AlertComponent from "../AlertComponent.tsx";
 export default function LoginForm() {
   //variabile pentru <AlertComponent>
   const [showAlert, setShowAlert] = useState(false);
-  const [err, setErr] = useState(0);
-  const [type, setType] = useState(0);
-
-  const err_array = [
-    "Campurile nu au fost completate corespunzator",
-    "Date incorecte",
-    "Logat cu succes! Pagina se va reincarca...",
-  ];
-
-  const alert_type = ["danger", "primary"];
+  const [err, setErr] = useState("");
 
   function handleInputChange() {
     setShowAlert(false);
@@ -36,7 +27,6 @@ export default function LoginForm() {
     target: HTMLFormElement | undefined;
   }) {
     e.preventDefault();
-    setType(0);
 
     //se preiau date din form-ul de HTML
     const formData = new FormData(e.target);
@@ -47,8 +37,8 @@ export default function LoginForm() {
 
     //daca form-ul nu a fost completat functia se opreste
     if (!email.length || !password.length) {
+      setErr("Campurile nu au fost completate corespunzator");
       setShowAlert(true);
-      setErr(0);
       return;
     }
 
@@ -75,17 +65,15 @@ export default function LoginForm() {
         localStorage.setItem("name", data.name);
         localStorage.setItem("user_id", data.id);
 
+        setErr("Logat cu succes! Pagina se va reincarca...");
         setShowAlert(true);
-        setType(1);
-        setErr(2);
 
         //reimprospatarea paginii
         window.location.reload();
       })
       .catch(() => {
+        setErr("Date incorecte");
         setShowAlert(true);
-        setType(0);
-        setErr(1);
       });
   }
 
@@ -123,11 +111,7 @@ export default function LoginForm() {
         </button>
 
         {showAlert && (
-          <AlertComponent
-            variant={alert_type[type]}
-            contents={err_array[err]}
-            dismiss={() => setShowAlert(false)}
-          />
+          <AlertComponent contents={err} dismiss={() => setShowAlert(false)} />
         )}
       </form>
     </>

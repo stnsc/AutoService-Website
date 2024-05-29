@@ -4,16 +4,7 @@ import { useEffect, useState } from "react";
 export default function UserPasswordComponent() {
   //parametrii pentru alerte
   const [showAlert, setShowAlert] = useState(false);
-  const [err, setErr] = useState(0);
-  const [type, setType] = useState(0);
-
-  const err_array = [
-    "Campurile nu au fost completate corespunzator",
-    "Nu poti introduce acelasi email!",
-    "Parola a fost modificata cu succes!",
-  ];
-
-  const alert_type = ["danger", "primary"];
+  const [err, setErr] = useState("");
 
   const [userID, setUserID] = useState("");
 
@@ -29,9 +20,8 @@ export default function UserPasswordComponent() {
     const newPasswordVerify = data.password_verify as string;
 
     if (!newPassword || !newPasswordVerify) {
+      setErr("Campurile nu au fost completate corespunzator");
       setShowAlert(true);
-      setErr(0);
-      setType(0);
       return;
     }
 
@@ -43,9 +33,8 @@ export default function UserPasswordComponent() {
       body: JSON.stringify({ userID, newPassword }),
     })
       .then((response) => {
+        setErr("Parola a fost modificata cu succes!");
         setShowAlert(true);
-        setErr(2);
-        setType(1);
         return response.json();
       })
       .catch((error) => {
@@ -82,11 +71,7 @@ export default function UserPasswordComponent() {
         </div>
         <button className="btn btn-primary">Modifica</button>
         {showAlert && (
-          <AlertComponent
-            variant={alert_type[type]}
-            contents={err_array[err]}
-            dismiss={() => setShowAlert(false)}
-          />
+          <AlertComponent contents={err} dismiss={() => setShowAlert(false)} />
         )}
       </form>
     </>

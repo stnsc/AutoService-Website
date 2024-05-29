@@ -33,16 +33,8 @@ export default function LocatiiPage() {
   const [userID, setUserID] = useState("");
 
   //sectiunea pentru a afisa alterte
-  const err_array = [
-    "Programare adaugata cu succes!",
-    "Campurile nu sunt completate.",
-    "Data a fost deja programata",
-  ];
-  const alert_type = ["danger", "primary"];
-
   const [showAlert, setShowAlert] = useState(false);
-  const [err, setErr] = useState(0);
-  const [type, setType] = useState(0);
+  const [err, setErr] = useState("");
 
   //fetch request pentru a arata toate locatiile in
   //baza de date "locations"
@@ -67,9 +59,8 @@ export default function LocatiiPage() {
   //functie pentru a adauga o programare
   function handleSubmit() {
     if (!dateTime || !details) {
+      setErr("Campurile nu sunt completate.");
       setShowAlert(true);
-      setErr(1);
-      setType(0);
       return;
     }
 
@@ -94,13 +85,11 @@ export default function LocatiiPage() {
         switch (response.status) {
           //daca request-ul s-a executat cu success
           case 200:
-            setErr(0);
-            setType(1);
+            setErr("Programare adaugata cu succes!");
             break;
           //daca request-ul nu s-a executat
           case 500:
-            setErr(2);
-            setType(0);
+            setErr("Data a fost deja programata");
             break;
         }
 
@@ -220,8 +209,7 @@ export default function LocatiiPage() {
               //unor alterte
               showAlert && (
                 <AlertComponent
-                  variant={alert_type[type]}
-                  contents={err_array[err]}
+                  contents={err}
                   dismiss={() => setShowAlert(false)}
                 />
               )

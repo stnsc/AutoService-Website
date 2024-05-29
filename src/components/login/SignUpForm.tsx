@@ -12,14 +12,7 @@ import AlertComponent from "../AlertComponent.tsx";
 export default function SignUpForm() {
   //variabile pentru componenta <AlertComponent>
   const [showAlert, setShowAlert] = useState(false);
-  const [err, setErr] = useState(0);
-  const [type, setType] = useState(0);
-  const err_array = [
-    "Campurile nu au fost completate corespunzator",
-    "Parolele nu sunt indentice.",
-    "Cont creat!",
-  ];
-  const alert_type = ["danger", "primary"];
+  const [err, setErr] = useState("");
 
   const [gender, setGender] = useState(0);
 
@@ -37,7 +30,6 @@ export default function SignUpForm() {
   //functia pentru crearea utilizatorului
   function createUser(e: { preventDefault: () => void; target: never }) {
     e.preventDefault();
-    setType(0);
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
@@ -49,14 +41,14 @@ export default function SignUpForm() {
 
     //logica pentru validare
     if (!name.length || !email.length || !password || !password_verify) {
+      setErr("Campurile nu au fost completate corespunzator");
       setShowAlert(true);
-      setErr(0);
       return;
     }
 
     if (password != password_verify) {
+      setErr("Parolele nu sunt indentice.");
       setShowAlert(true);
-      setErr(1);
       return;
     }
 
@@ -70,9 +62,8 @@ export default function SignUpForm() {
     }).then((response) => {
       //la executarea cu succes, se afiseaza o alerta pentru a informa
       //confirmarea adaugarii utilizatorului
+      setErr("Cont creat!");
       setShowAlert(true);
-      setType(1);
-      setErr(2);
       return response.text();
     });
   }
@@ -149,11 +140,7 @@ export default function SignUpForm() {
         </button>
 
         {showAlert && (
-          <AlertComponent
-            variant={alert_type[type]}
-            contents={err_array[err]}
-            dismiss={() => setShowAlert(false)}
-          />
+          <AlertComponent contents={err} dismiss={() => setShowAlert(false)} />
         )}
       </form>
     </>

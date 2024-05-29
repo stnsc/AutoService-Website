@@ -4,16 +4,7 @@ import AlertComponent from "../../AlertComponent.tsx";
 export default function UserNameComponent() {
   //parametrii pentru alerte
   const [showAlert, setShowAlert] = useState(false);
-  const [err, setErr] = useState(0);
-  const [type, setType] = useState(0);
-
-  const err_array = [
-    "Campurile nu au fost completate corespunzator",
-    "Nu poti introduce acelasi nume!",
-    "Numele a fost modificat cu succes! Pagina se va reincarca...",
-  ];
-
-  const alert_type = ["danger", "primary"];
+  const [err, setErr] = useState("");
 
   const [userID, setUserID] = useState("");
   const [username, setUsername] = useState("");
@@ -27,16 +18,14 @@ export default function UserNameComponent() {
     const name = data.name as string;
 
     if (!name) {
+      setErr("Campurile nu au fost completate corespunzator");
       setShowAlert(true);
-      setErr(0);
-      setType(0);
       return;
     }
 
     if (name === username.name) {
+      setErr("Nu poti introduce acelasi nume!");
       setShowAlert(true);
-      setErr(1);
-      setType(0);
       return;
     }
 
@@ -49,9 +38,8 @@ export default function UserNameComponent() {
       body: JSON.stringify({ userID, name }),
     })
       .then((response) => {
+        setErr("Numele a fost modificat cu succes! Pagina se va reincarca...");
         setShowAlert(true);
-        setErr(2);
-        setType(1);
         localStorage.setItem("name", name);
         return response.json();
       })
@@ -102,11 +90,7 @@ export default function UserNameComponent() {
         </div>
         <button className="btn btn-primary">Modifica</button>
         {showAlert && (
-          <AlertComponent
-            variant={alert_type[type]}
-            contents={err_array[err]}
-            dismiss={() => setShowAlert(false)}
-          />
+          <AlertComponent contents={err} dismiss={() => setShowAlert(false)} />
         )}
       </form>
     </>
