@@ -84,19 +84,19 @@ export default function ManagePage() {
                   onClick={() => setPage("adminContact")}
                 >
                   <i className="bi bi-telephone-inbound manage-icon"></i>
-                  Contactari
+                  Contactări
                 </li>
                 <li
                   className="manage-li"
                   onClick={() => setPage("adminSchedule")}
                 >
-                  <i className="bi bi-calendar manage-icon"></i>Programari
+                  <i className="bi bi-calendar manage-icon"></i>Programări
                 </li>
                 <li
                   className="manage-li"
                   onClick={() => setPage("adminLocation")}
                 >
-                  <i className="bi bi-map manage-icon"></i>Locatii
+                  <i className="bi bi-map manage-icon"></i>Locații
                 </li>
               </>
             )}

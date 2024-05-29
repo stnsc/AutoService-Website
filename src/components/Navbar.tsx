@@ -114,7 +114,7 @@ export default function Navbar() {
             className={`${isActive === "/" ? activeClass : inactiveClass}`}
             onClick={setActivePage}
           >
-            Acasa
+            Acasă
           </Link>
 
           <Link
@@ -130,7 +130,7 @@ export default function Navbar() {
             className={`${isActive === "/locatii" ? activeClass : inactiveClass}`}
             onClick={setActivePage}
           >
-            Locatii
+            Locații
           </Link>
 
           <Link

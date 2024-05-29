@@ -58,8 +58,8 @@ export default function AdminContactComponent() {
       <div className="past-tickets-div">
         <div className="information-warning">
           <h4>
-            <i className="bi bi-exclamation-diamond"></i> In cazul in care nu se
-            afiseaza nimic, toate tichetele au fost preluate de alti
+            <i className="bi bi-exclamation-diamond"></i> În cazul în care nu se
+            afișează nimic, toate tichetele au fost preluate de alți
             administratori!
           </h4>
         </div>
@@ -68,7 +68,7 @@ export default function AdminContactComponent() {
             <h1>
               <i className="bi bi-arrow-clockwise"></i>
             </h1>
-            <h2>Se incarca...</h2>
+            <h2>Se încarca...</h2>
           </div>
         )}
         {tickets.map(({ ticket_id, subject, message, admin_id }: Ticket) => (

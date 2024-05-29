@@ -18,13 +18,13 @@ export default function UserNameComponent() {
     const name = data.name as string;
 
     if (!name) {
-      setErr("Campurile nu au fost completate corespunzator");
+      setErr("Câmpurile nu au fost completate corespunzător");
       setShowAlert(true);
       return;
     }
 
     if (name === username.name) {
-      setErr("Nu poti introduce acelasi nume!");
+      setErr("Nu poți introduce același nume!");
       setShowAlert(true);
       return;
     }
@@ -38,7 +38,7 @@ export default function UserNameComponent() {
       body: JSON.stringify({ userID, name }),
     })
       .then((response) => {
-        setErr("Numele a fost modificat cu succes! Pagina se va reincarca...");
+        setErr("Numele a fost modificat cu succes! Pagina se va reîncarca...");
         setShowAlert(true);
         localStorage.setItem("name", name);
         return response.json();
@@ -88,7 +88,7 @@ export default function UserNameComponent() {
           />
           <label htmlFor="floatingInput">Schimbare nume</label>
         </div>
-        <button className="btn btn-primary">Modifica</button>
+        <button className="btn btn-primary">Modifică</button>
         {showAlert && (
           <AlertComponent contents={err} dismiss={() => setShowAlert(false)} />
         )}

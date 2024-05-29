@@ -59,7 +59,7 @@ export default function LocatiiPage() {
   //functie pentru a adauga o programare
   function handleSubmit() {
     if (!dateTime || !details) {
-      setErr("Campurile nu sunt completate.");
+      setErr("Câmpurile nu sunt completate.");
       setShowAlert(true);
       return;
     }
@@ -85,11 +85,11 @@ export default function LocatiiPage() {
         switch (response.status) {
           //daca request-ul s-a executat cu success
           case 200:
-            setErr("Programare adaugata cu succes!");
+            setErr("Programare adaugată cu succes!");
             break;
           //daca request-ul nu s-a executat
           case 500:
-            setErr("Data a fost deja programata");
+            setErr("Data a fost deja programată");
             break;
         }
 
@@ -155,7 +155,7 @@ export default function LocatiiPage() {
                             setData([name, location_id]);
                           }}
                         >
-                          Inregistreaza-te!
+                          Înregistreaza-te!
                         </motion.button>
                       )
                     }
@@ -164,7 +164,7 @@ export default function LocatiiPage() {
                         disabled
                         className="location-button btn btn-primary"
                       >
-                        Logheaza-te pentru a continua
+                        Loghează-te pentru a continua
                       </button>
                     )}
                   </div>
@@ -186,7 +186,7 @@ export default function LocatiiPage() {
               Ai Selectat <span style={{ fontWeight: "bold" }}>{data[0]}</span>
             </h2>
             <div className="schedule-section">
-              <h4>Data programare:</h4>
+              <h4>Dată programare:</h4>
               <input
                 aria-label="Date and time"
                 type="datetime-local"
@@ -196,12 +196,12 @@ export default function LocatiiPage() {
               <p>{dateTime}</p>
             </div>
             <div className="schedule-section">
-              <h4>Detalii aditionale:</h4>
+              <h4>Detalii adiționale:</h4>
               <textarea name="body" onChange={handleDetailsChange} />
             </div>
             <div className="schedule-section">
               <button className="btn btn-primary" onClick={handleSubmit}>
-                Programeaza-te
+                Programează-te
               </button>
             </div>
             {

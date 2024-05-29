@@ -91,7 +91,7 @@ export default function ContactPage() {
       <HeroTitle
         title={"Contact"}
         description={
-          "Vrei sa spui o intrebare specialistilor nostrii? Trimite un tichet aici si iti vom raspunde cat de repede posibil!"
+          "Vrei să spui o întrebare specialiștilor noștrii? Trimite un tichet aici și îți vom răspunde cât de repede posibil!"
         }
       />
 
@@ -104,8 +104,8 @@ export default function ContactPage() {
                 <i className="bi bi-exclamation-diamond"></i> Nu esti logat!
               </h3>
               <h5>
-                Pagina de contact foloseste un sistem de tichete personalizat
-                care necesita utilizatorul sa foloseasca un cont!
+                Pagina de contact folosește un sistem de tichete personalizat
+                care necesită utilizatorul să folosească un cont!
               </h5>
             </h1>
           </div>

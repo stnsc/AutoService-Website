@@ -41,7 +41,7 @@ export default function SignUpForm() {
 
     //logica pentru validare
     if (!name.length || !email.length || !password || !password_verify) {
-      setErr("Campurile nu au fost completate corespunzator");
+      setErr("Câmpurile nu au fost completate corespunzător");
       setShowAlert(true);
       return;
     }
@@ -76,7 +76,7 @@ export default function SignUpForm() {
         onSubmit={createUser}
         onChange={handleInputChange}
       >
-        <h1 className="white-label">Inscriere</h1>
+        <h1 className="white-label">Înscriere</h1>
 
         <div className="form-floating">
           <input
@@ -105,7 +105,7 @@ export default function SignUpForm() {
             placeholder="pass"
             name="password"
           />
-          <label htmlFor="floatingInput">Parola</label>
+          <label htmlFor="floatingInput">Parolă</label>
         </div>
 
         <div className="form-floating">
@@ -115,7 +115,7 @@ export default function SignUpForm() {
             placeholder="pass"
             name="password_verify"
           />
-          <label htmlFor="floatingInput">Reintroducere parola</label>
+          <label htmlFor="floatingInput">Reintroducere parolă</label>
         </div>
 
         <div className="form-floating">
@@ -129,14 +129,14 @@ export default function SignUpForm() {
             <option defaultValue="0">Alege</option>
             <option value="1">Masculin</option>
             <option value="2">Feminin</option>
-            <option value="3">Prefer sa nu raspund</option>
+            <option value="3">Prefer să nu raspund</option>
           </select>
 
           <label htmlFor="floatingInput">Sex</label>
         </div>
 
         <button className="btn btn-primary py-2" type="submit">
-          Inscriere!
+          Înscriere!
         </button>
 
         {showAlert && (

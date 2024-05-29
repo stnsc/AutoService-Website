@@ -20,7 +20,7 @@ export default function UserPasswordComponent() {
     const newPasswordVerify = data.password_verify as string;
 
     if (!newPassword || !newPasswordVerify) {
-      setErr("Campurile nu au fost completate corespunzator");
+      setErr("Câmpurile nu au fost completate corespunzător");
       setShowAlert(true);
       return;
     }
@@ -33,7 +33,7 @@ export default function UserPasswordComponent() {
       body: JSON.stringify({ userID, newPassword }),
     })
       .then((response) => {
-        setErr("Parola a fost modificata cu succes!");
+        setErr("Parola a fost modificată cu succes!");
         setShowAlert(true);
         return response.json();
       })
@@ -50,7 +50,7 @@ export default function UserPasswordComponent() {
   return (
     <>
       <form className="user-manage-div" onSubmit={handlePasswordChange}>
-        <h3 className="m-1">Parola:</h3>
+        <h3 className="m-1">Parolă:</h3>
         <div className="form-floating">
           <input
             type="password"
@@ -58,7 +58,7 @@ export default function UserPasswordComponent() {
             name="password"
             placeholder="********"
           />
-          <label htmlFor="floatingInput">Parola noua</label>
+          <label htmlFor="floatingInput">Parolă noua:</label>
         </div>
         <div className="form-floating">
           <input
@@ -67,9 +67,9 @@ export default function UserPasswordComponent() {
             name="password_verify"
             placeholder="********"
           />
-          <label htmlFor="floatingInput">Reintroducere parola noua</label>
+          <label htmlFor="floatingInput">Reintroducere parolă noua:</label>
         </div>
-        <button className="btn btn-primary">Modifica</button>
+        <button className="btn btn-primary">Modifică</button>
         {showAlert && (
           <AlertComponent contents={err} dismiss={() => setShowAlert(false)} />
         )}

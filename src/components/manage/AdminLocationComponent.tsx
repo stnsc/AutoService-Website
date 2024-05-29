@@ -128,7 +128,7 @@ export default function AdminLocationComponent() {
                     setDeleteModalOpen(true);
                   }}
                 >
-                  Sterge Locatia
+                  Șterge Locația
                 </button>
               </div>
             </>
@@ -139,7 +139,7 @@ export default function AdminLocationComponent() {
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isAddModalOpen && (
           <ModalComponent onClose={() => setAddModalOpen(false)}>
-            <h2 className="admin-location-title">Adaugare Locatie</h2>
+            <h2 className="admin-location-title">Adăugare Locație</h2>
             <form
               method="post"
               className="form-add-location"
@@ -147,7 +147,7 @@ export default function AdminLocationComponent() {
             >
               <div className="form-floating">
                 <input type="text" name="name" className="form-control" />
-                <label htmlFor="floatingInput">Nume Locatie</label>
+                <label htmlFor="floatingInput">Nume Locație</label>
               </div>
               <div className="form-floating">
                 <input type="text" name="address" className="form-control" />
@@ -169,15 +169,15 @@ export default function AdminLocationComponent() {
                 />
                 <label htmlFor="floatingInput">Descriere</label>
               </div>
-              <button className="btn btn-primary">Adaugare</button>
+              <button className="btn btn-primary">Adăugare</button>
             </form>
           </ModalComponent>
         )}
         {isDeleteModalOpen && (
           <ModalComponent onClose={() => setDeleteModalOpen(false)}>
-            <h2 className="admin-location-title">Sterge Locatie</h2>
+            <h2 className="admin-location-title">Șterge Locatie</h2>
             <h3>
-              Esti sigur ca vrei sa stergi locatia <b>{locationData[1]}</b>?
+              Ești sigur că vrei sa ștergi locația <b>{locationData[1]}</b>?
             </h3>
             <div className="admin-button-div">
               <button

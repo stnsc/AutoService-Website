@@ -17,13 +17,13 @@ export default function UserEmailComponent() {
     const newEmail = data.email as string;
 
     if (!newEmail) {
-      setErr("Campurile nu au fost completate corespunzator");
+      setErr("Câmpurile nu au fost completate corespunzător");
       setShowAlert(true);
       return;
     }
 
     if (newEmail === email.email) {
-      setErr("Nu poti introduce acelasi email!");
+      setErr("Nu poți introduce același email!");
       setShowAlert(true);
       return;
     }
@@ -37,7 +37,7 @@ export default function UserEmailComponent() {
       body: JSON.stringify({ userID, newEmail }),
     })
       .then((response) => {
-        setErr("Numele a fost modificat cu succes! Pagina se va reincarca...");
+        setErr("Numele a fost modificat cu succes! Pagina se va reîncarca...");
         setShowAlert(true);
         return response.json();
       })
@@ -88,7 +88,7 @@ export default function UserEmailComponent() {
           />
           <label htmlFor="floatingInput">Schimbare Email</label>
         </div>
-        <button className="btn btn-primary">Modifica</button>
+        <button className="btn btn-primary">Modifică</button>
         {showAlert && (
           <AlertComponent contents={err} dismiss={() => setShowAlert(false)} />
         )}

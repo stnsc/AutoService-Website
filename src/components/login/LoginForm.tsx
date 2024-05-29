@@ -37,7 +37,7 @@ export default function LoginForm() {
 
     //daca form-ul nu a fost completat functia se opreste
     if (!email.length || !password.length) {
-      setErr("Campurile nu au fost completate corespunzator");
+      setErr("Câmpurile nu au fost completate corespunzător");
       setShowAlert(true);
       return;
     }
@@ -65,7 +65,7 @@ export default function LoginForm() {
         localStorage.setItem("name", data.name);
         localStorage.setItem("user_id", data.id);
 
-        setErr("Logat cu succes! Pagina se va reincarca...");
+        setErr("Logat cu succes! Pagina se va reincărca...");
         setShowAlert(true);
 
         //reimprospatarea paginii
@@ -94,7 +94,7 @@ export default function LoginForm() {
             placeholder="name@example.com"
             name="email"
           />
-          <label htmlFor="floatingInput">Adresa Email</label>
+          <label htmlFor="floatingInput">Adresă Email</label>
         </div>
 
         <div className="form-floating">
@@ -104,7 +104,7 @@ export default function LoginForm() {
             placeholder="pass"
             name="password"
           />
-          <label htmlFor="floatingInput">Parola</label>
+          <label htmlFor="floatingInput">Parolă</label>
         </div>
         <button className="btn btn-primary py-2" type="submit">
           Logare

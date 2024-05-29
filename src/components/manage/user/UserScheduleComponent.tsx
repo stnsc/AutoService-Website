@@ -75,7 +75,7 @@ export default function UserScheduleComponent() {
             <h1>
               <i className="bi bi-arrow-clockwise"></i>
             </h1>
-            <h2>Se incarca...</h2>
+            <h2>Se încarca...</h2>
           </div>
         )}
         {error && (
@@ -83,7 +83,7 @@ export default function UserScheduleComponent() {
             <h1>
               <i className="bi bi-exclamation-diamond"></i>
             </h1>
-            <h2>Nu s-au gasit rezultate</h2>
+            <h2>Nu s-au găsit rezultate</h2>
           </div>
         )}
         {appointments.map(
@@ -94,7 +94,7 @@ export default function UserScheduleComponent() {
                 La service-ul <b>{name}</b>
               </p>
               <p>
-                Locatie: <b>{address}</b>
+                Locație: <b>{address}</b>
               </p>
               <p>
                 La data de: <b>{app_date.split("T")[0]}</b>, ora{" "}
@@ -107,7 +107,7 @@ export default function UserScheduleComponent() {
                   setAppID(app_id);
                 }}
               >
-                Anuleaza
+                Anulează
               </button>
             </div>
           ),
@@ -116,9 +116,9 @@ export default function UserScheduleComponent() {
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isModalOpen && (
           <ModalComponent onClose={() => setModalOpen(false)}>
-            <h3>Esti sigur ca vrei sa anulezi aceasta programare?</h3>
+            <h3>Esti sigur ca vrei să anulezi această programare?</h3>
             <h4>
-              <i>(cu numarul {appID})</i>
+              <i>(cu numărul {appID})</i>
             </h4>
             <div className="flex-row">
               <button

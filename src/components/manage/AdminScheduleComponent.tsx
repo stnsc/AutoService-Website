@@ -66,7 +66,7 @@ export default function AdminScheduleComponent() {
             <h1>
               <i className="bi bi-arrow-clockwise"></i>
             </h1>
-            <h2>Se incarca...</h2>
+            <h2>Se încarca...</h2>
           </div>
         )}
         {error && (
@@ -75,7 +75,7 @@ export default function AdminScheduleComponent() {
               <i className="bi bi-exclamation-diamond"></i>
             </h1>
 
-            <h2>Nu s-au gasit rezultate</h2>
+            <h2>Nu s-au găsit rezultate</h2>
           </div>
         )}
         {appointments.map(
@@ -107,7 +107,7 @@ export default function AdminScheduleComponent() {
                     setAppID(app_id);
                   }}
                 >
-                  Sterge programarea
+                  Șterge programarea
                 </button>
               </div>
             </>
@@ -118,7 +118,7 @@ export default function AdminScheduleComponent() {
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isModalOpen && (
           <ModalComponent onClose={() => setModalOpen(false)}>
-            <h3>Esti sigur ca vrei sa stergi aceasta programare?</h3>
+            <h3>Ești sigur că vrei să ștergi această programare?</h3>
             <div className="flex-row">
               <button
                 className="btn btn-secondary m-2"
