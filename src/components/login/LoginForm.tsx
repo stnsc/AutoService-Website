@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AlertComponent from "../AlertComponent.tsx";
+import { useNavigate } from "react-router-dom";
 
 /*
  * Login Form
@@ -13,6 +14,8 @@ import AlertComponent from "../AlertComponent.tsx";
  * */
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   //variabile pentru <AlertComponent>
   const [showAlert, setShowAlert] = useState(false);
   const [err, setErr] = useState("");
@@ -69,6 +72,7 @@ export default function LoginForm() {
         setShowAlert(true);
 
         //reimprospatarea paginii
+        navigate("/");
         window.location.reload();
       })
       .catch(() => {
