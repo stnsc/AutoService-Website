@@ -60,7 +60,7 @@ export default function ManagePage() {
     <>
       <div className="manage-container">
         <div className="manage-nav">
-          <ul className="manage-ul list-unstyled">
+          <ul className="manage-ul list-unstyled manage-nav-flex">
             <li className="manage-li li-emphasis">
               <i className="bi bi-person-fill manage-icon"></i>Utilizator
             </li>

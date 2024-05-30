@@ -23,8 +23,8 @@ export default function HomePage() {
 
       {/* SERVICES COMPONENT */}
 
-      <div className="row">
-        <div className="col-sm-4">
+      <div className="home-row">
+        <div className="home-col">
           <div className="card">
             <img
               src="../../assets/placeholder.png"
@@ -41,7 +41,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="col-sm-4">
+        <div className="home-col">
           <div className="card">
             <img
               src="../../assets/placeholder.png"
@@ -58,7 +58,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="col-sm-4">
+        <div className="home-col">
           <div className="card">
             <img
               src="../../assets/placeholder.png"
@@ -79,8 +79,8 @@ export default function HomePage() {
       {/* STATISTICS COMPONENT */}
 
       <div className="stats-container">
-        <div className="row">
-          <div className="col-sm-4">
+        <div className="home-row">
+          <div className="home-col">
             <div className="card">
               <div className="card-body">
                 <h1>10+</h1>
@@ -88,7 +88,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          <div className="col-sm-4">
+          <div className="home-col">
             <div className="card">
               <div className="card-body">
                 <h1>20+</h1>
@@ -96,7 +96,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          <div className="col-sm-4">
+          <div className="home-col">
             <div className="card">
               <div className="card-body">
                 <h1>30+</h1>

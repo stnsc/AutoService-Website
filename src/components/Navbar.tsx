@@ -15,7 +15,7 @@ export default function Navbar() {
   const [isActive, setActive] = useState("Acasa");
 
   //clase active si inactive pentru afisarea dinamica a paginii curente
-  const inactiveClass = "nav-link px-2 me-1";
+  const inactiveClass = "nav-link px-2";
   const activeClass = inactiveClass + " nav-selected";
 
   useEffect(() => {
@@ -40,6 +40,8 @@ export default function Navbar() {
 
     const currentDate = new Date();
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       //failed
       localStorage.removeItem("name");
@@ -69,7 +71,9 @@ export default function Navbar() {
 
   const [isAdmin, setIsAdmin] = useState(false);
   function getAdmin() {
-    const userID = Number(localStorage.getItem("user_id"));
+    const userID = localStorage.getItem("user_id");
+
+    if (!userID) return;
 
     fetch(
       `http://${import.meta.env.VITE_HOST_IP}:3001/api/users/isAdmin?userID=${userID}`,
@@ -97,86 +101,99 @@ export default function Navbar() {
   }, [setActivePage]);
 
   return (
-    <nav className="navbar navbar-expand-sm fixed-top">
+    <nav className="navbar navbar-expand-md fixed-top bg-body">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           <img src="../../assets/logo.png" alt="Bootstrap" height="60" />
         </a>
-        <div className="navbar me-auto p-2" id="navbarNav">
-          {/*
+        <button
+          className="navbar-toggler collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggler"
+          aria-controls="navbarToggler"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarToggler">
+          <div className="nav navbar-nav me-auto">
+            {/*
             Frontend-ul navigatiei
 
             Componentele <Link> muta utilizatorul de la o pagina la alta
             si modifica stilul butonului
           */}
-          <Link
-            to="/"
-            className={`${isActive === "/" ? activeClass : inactiveClass}`}
-            onClick={setActivePage}
-          >
-            Acasă
-          </Link>
+            <Link
+              to="/"
+              className={`${isActive === "/" ? activeClass : inactiveClass}`}
+              onClick={setActivePage}
+            >
+              Acasă
+            </Link>
 
-          <Link
-            to="/servicii"
-            className={`${isActive === "/servicii" ? activeClass : inactiveClass}`}
-            onClick={setActivePage}
-          >
-            Servicii
-          </Link>
+            <Link
+              to="/servicii"
+              className={`${isActive === "/servicii" ? activeClass : inactiveClass}`}
+              onClick={setActivePage}
+            >
+              Servicii
+            </Link>
 
-          <Link
-            to="/locatii"
-            className={`${isActive === "/locatii" ? activeClass : inactiveClass}`}
-            onClick={setActivePage}
-          >
-            Locații
-          </Link>
+            <Link
+              to="/locatii"
+              className={`${isActive === "/locatii" ? activeClass : inactiveClass}`}
+              onClick={setActivePage}
+            >
+              Locații
+            </Link>
 
-          <Link
-            to="/contact"
-            className={`${isActive === "/contact" ? activeClass : inactiveClass}`}
-            onClick={setActivePage}
-          >
-            Contact
-          </Link>
-        </div>
-        <div className="nav-user-info">
-          {user && (
-            <>
-              <div className="username-details">
-                <p>{`Buna, ${user}!`}</p>
-                {isAdmin && (
-                  <p className="small-text">
-                    <i className="bi bi-person-gear"></i> Administrator
-                  </p>
-                )}
-              </div>
+            <Link
+              to="/contact"
+              className={`${isActive === "/contact" ? activeClass : inactiveClass}`}
+              onClick={setActivePage}
+            >
+              Contact
+            </Link>
+          </div>
+          <div className="nav-user-info">
+            {user && (
+              <>
+                <div className="username-details">
+                  <p>{`Buna, ${user}!`}</p>
+                  {isAdmin && (
+                    <p className="small-text">
+                      <i className="bi bi-person-gear"></i> Administrator
+                    </p>
+                  )}
+                </div>
 
-              <Link
-                to="/manage"
-                className={`${isActive === "/manage" ? activeClass : inactiveClass} m-0 p-3`}
-                onClick={setActivePage}
-              >
-                Detalii cont
-              </Link>
-            </>
-          )}
+                <Link
+                  to="/manage"
+                  className={`${isActive === "/manage" ? activeClass : inactiveClass} manage-div`}
+                  onClick={setActivePage}
+                >
+                  Detalii cont
+                </Link>
+              </>
+            )}
 
-          <p
-            className={`${!user ? "d-none" : ""} logout-hover m-0 p-3 nav-link`}
-            style={{}}
-            onClick={handleDisconnect}
-          >
-            Deconectare
-          </p>
-          <Link
-            to="/login"
-            className={`${user ? "d-none" : ""} m-1 p-3 ${isActive === "/login" ? activeClass : inactiveClass}`}
-            onClick={setActivePage}
-          >
-            Login
-          </Link>
+            <p
+              className={`${!user ? "d-none" : ""} logout-hover m-0 p-3 nav-link`}
+              style={{}}
+              onClick={handleDisconnect}
+            >
+              <i className="bi bi-box-arrow-right"></i>
+            </p>
+            <Link
+              to="/login"
+              className={`${user ? "d-none" : ""} m-1 p-3 ${isActive === "/login" ? activeClass : inactiveClass}`}
+              onClick={setActivePage}
+            >
+              Login
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

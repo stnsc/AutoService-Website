@@ -27,25 +27,24 @@ export default function Footer() {
 
   return (
     <>
-      <div className="card footer-container fixed-bottom rounded-5">
-        <div className="card-body text-center text-white rounded-5 d-flex align-items-center justify-content-between">
-          <p className="card-text center m-0">
-            Licență de{" "}
-            <a href="https://github.com/stnsc" className="link-info">
-              Stănescu Vlăduț-George
-            </a>
-          </p>
-          <form method="post" className="form-check form-switch">
-            <input
-              className="form-check-input dark-mode-toggle"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-              onChange={handleChange}
-              checked={darkMode}
-            />
-          </form>
-        </div>
+      <div className="footer-container fixed-bottom text-white">
+        <p className="card-text center m-0">
+          Licență de{" "}
+          <a href="https://github.com/stnsc" className="link-info">
+            Stănescu Vlăduț-George
+          </a>
+        </p>
+        <form method="post" className="form-check form-switch dark-mode-div">
+          <p>Dark Mode</p>
+          <input
+            className="form-check-input dark-mode-toggle"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            onChange={handleChange}
+            checked={darkMode}
+          />
+        </form>
       </div>
     </>
   );

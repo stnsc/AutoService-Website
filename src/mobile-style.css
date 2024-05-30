@@ -1,0 +1,92 @@
+@media only screen and (max-width: 767px){
+    .login-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .navbar-collapse{
+        text-align: center;
+        font-size: larger;
+    }
+    .navbar-nav{
+        margin-bottom: 1em;
+    }
+    .nav-user-info{
+        justify-content: center;
+    }
+    #hero-section h1{
+        max-width: 100%;
+        font-size: 3em;
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.4));
+    }
+    #hero-section p{
+        max-width: 100%;
+        font-size: 1.2em;
+        padding-left: 0;
+        padding-right: 0;
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+    }
+
+    .home-row{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .home-col{
+            margin: 1em 4em;
+        }
+    }
+    .modal-overlay{
+        .modal-content{
+            width: 100%;
+        }
+    }
+
+    .auth-text{
+        font-size: 3em;
+    }
+    .auth-desc{
+        font-size: 1.5em;
+    }
+
+    .manage-container{
+        margin: 1em;
+
+        display: flex;
+        flex-direction: column;
+
+        .manage-nav{
+            width: 100%;
+            margin: 0;
+
+            .manage-nav-flex{
+                display: flex;
+                margin: 0;
+                overflow-x: scroll;
+
+                .manage-li{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    justify-content: center;
+                    padding: 1em;
+                }
+            }
+        }
+        .manage-content{
+            width: 100%;
+            margin: 1em 0 0;
+        }
+    }
+
+    .contact-center{
+        display: flex;
+        flex-direction: column;
+
+        .contact-div{
+            width: 100%;
+            margin: 0 0 1em;
+        }
+    }
+}
