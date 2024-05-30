@@ -173,7 +173,6 @@ body {
 
 .location-card{
     background: rgba(54, 224, 199, 0.3);
-    box-shadow: 100px 0 55px 0 rgba(54, 224, 199, 0.2), -100px 0 55px 0 rgba(54, 224, 199, 0.2);
     border-radius: 2em;
     display: flex;
     flex-direction: column;
