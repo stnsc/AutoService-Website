@@ -9,7 +9,7 @@
 import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   function handleChange(e: {
     target: { checked: boolean | ((prevState: boolean) => boolean) };

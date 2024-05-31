@@ -61,7 +61,11 @@ export default function HomePage() {
       <h2 className="home-subtitle">Cateva servicii pe care le oferim:</h2>
 
       <div className="services-div">
-        <div className="card">
+        <motion.div
+          className="card"
+          whileHover={{ y: -5, scale: 1.05 }}
+          transition={{ type: "ease" }}
+        >
           <div
             className="card-img-top"
             style={{
@@ -83,9 +87,13 @@ export default function HomePage() {
               Mai multe
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="card">
+        <motion.div
+          className="card"
+          whileHover={{ y: -5, scale: 1.05 }}
+          transition={{ type: "ease" }}
+        >
           <div
             className="card-img-top"
             style={{
@@ -107,9 +115,13 @@ export default function HomePage() {
               Mai multe
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="card">
+        <motion.div
+          className="card"
+          whileHover={{ y: -5, scale: 1.05 }}
+          transition={{ type: "ease" }}
+        >
           <div
             className="card-img-top"
             style={{
@@ -131,7 +143,7 @@ export default function HomePage() {
               Mai multe
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* STATISTICS COMPONENT */}
@@ -139,30 +151,42 @@ export default function HomePage() {
       <div className="stats-container">
         <h2 className="home-subtitle">Statistici despre firma noastră:</h2>
         <div className="home-row">
-          <div className="home-col">
+          <motion.div
+            className="home-col"
+            whileHover={{ x: -10, scale: 1.1 }}
+            transition={{ type: "ease" }}
+          >
             <div className="card">
               <div className="card-body">
                 <h1>{users.max}+</h1>
                 <p>Conturi de utilizatori</p>
               </div>
             </div>
-          </div>
-          <div className="home-col">
+          </motion.div>
+          <motion.div
+            className="home-col"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "ease" }}
+          >
             <div className="card">
               <div className="card-body">
                 <h1>{appointments.max}+</h1>
                 <p>De programari realizate</p>
               </div>
             </div>
-          </div>
-          <div className="home-col">
+          </motion.div>
+          <motion.div
+            className="home-col"
+            whileHover={{ x: 10, scale: 1.1 }}
+            transition={{ type: "ease" }}
+          >
             <div className="card">
               <div className="card-body">
                 <h1>{tickets.max}+</h1>
                 <p>Tichete deschise</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

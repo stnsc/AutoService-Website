@@ -682,7 +682,7 @@ body {
 
 .home-subtitle{
     text-align: center;
-    margin-top: 1em;
+    margin: 1em 1em 1em 1em;
     padding: .5em;
     border-radius: 1em;
     background: rgba(0,0,0,0.15);
@@ -690,7 +690,8 @@ body {
 
 .stats-container{
     .home-subtitle{
-        border-radius: 0
+        border-radius: 0;
+        margin: 0;
     }
 }
 

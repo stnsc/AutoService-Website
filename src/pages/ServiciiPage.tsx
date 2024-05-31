@@ -51,7 +51,12 @@ export default function ServiciiPage() {
               detail_2,
               detail_3,
             }: Service) => (
-              <div className="card" key={service_id}>
+              <motion.div
+                className="card"
+                key={service_id}
+                whileHover={{ y: -5, scale: 1.05 }}
+                transition={{ type: "ease" }}
+              >
                 <div
                   className="card-img-top"
                   style={{
@@ -74,7 +79,7 @@ export default function ServiciiPage() {
                     Detalii...
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ),
           )
         }

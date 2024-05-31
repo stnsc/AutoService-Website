@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useLocation } from "react-router";
@@ -11,6 +11,8 @@ import { useLocation } from "react-router";
  * */
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState("");
   const [isActive, setActive] = useState("Acasa");
 
@@ -103,7 +105,12 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-md fixed-top bg-body">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a
+          className="navbar-brand"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <img src="../../assets/logo.png" alt="Bootstrap" height="60" />
         </a>
         <button
