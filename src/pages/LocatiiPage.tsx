@@ -129,47 +129,44 @@ export default function LocatiiPage() {
               image,
               coords,
             }: Location) => (
-              <>
-                <div className="location-card" key={location_id}>
-                  <img
-                    className="location-image"
-                    alt=""
-                    style={{ backgroundImage: "url(" + image + ")" }}
-                  />
+              <div className="card" key={location_id}>
+                <div
+                  className="card-img-top"
+                  style={{ backgroundImage: "url(" + image + ")" }}
+                />
 
-                  <div className="location-body">
-                    <h1 className="location-name">{name}</h1>
-                    <p className="location-desc">
-                      {description} {<br />} {address} {<br />} {coords}
-                    </p>
-                    {
-                      //buton pentru a deschide un pop-up cu detalii aditionale pentru
-                      //programare daca utilizatorul este logat
-                      logged && (
-                        <motion.button
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          className="location-button btn btn-primary"
-                          onClick={() => {
-                            setModalOpen(true);
-                            setData([name, location_id]);
-                          }}
-                        >
-                          Înregistreaza-te!
-                        </motion.button>
-                      )
-                    }
-                    {!logged && (
-                      <button
-                        disabled
+                <div className="location-body">
+                  <h1 className="location-name">{name}</h1>
+                  <p className="location-desc">
+                    {description} {<br />} {address} {<br />} {coords}
+                  </p>
+                  {
+                    //buton pentru a deschide un pop-up cu detalii aditionale pentru
+                    //programare daca utilizatorul este logat
+                    logged && (
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                         className="location-button btn btn-primary"
+                        onClick={() => {
+                          setModalOpen(true);
+                          setData([name, location_id]);
+                        }}
                       >
-                        Loghează-te pentru a continua
-                      </button>
-                    )}
-                  </div>
+                        Înregistrează-te!
+                      </motion.button>
+                    )
+                  }
+                  {!logged && (
+                    <button
+                      disabled
+                      className="location-button btn btn-primary"
+                    >
+                      Loghează-te pentru a continua
+                    </button>
+                  )}
                 </div>
-              </>
+              </div>
             ),
           )
         }

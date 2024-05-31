@@ -80,9 +80,21 @@ const deleteAppointment = async (body) => {
     })
 }
 
+//statistica
+const statistics = async () => {
+    return await new Promise((resolve, reject) => {
+        pool.query(`SELECT max(app_id) FROM appointments`, (error, results) => {
+            if(error) reject(error);
+            if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+            else reject(new Error("Nu s-au putut lua statisticele."))
+        })
+    })
+}
+
 module.exports = {
     createAppointment,
     getAppointments,
     getAllAppointments,
-    deleteAppointment
+    deleteAppointment,
+    statistics
 }

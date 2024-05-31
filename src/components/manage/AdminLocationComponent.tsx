@@ -107,7 +107,7 @@ export default function AdminLocationComponent() {
             coords,
           }: Location) => (
             <>
-              <div className="location-card" key={location_id}>
+              <div className="card" key={location_id}>
                 <img
                   className="location-image"
                   alt=""

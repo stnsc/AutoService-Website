@@ -13,6 +13,7 @@ const users_model = require("./pg/usersModel.cjs");
 const locations_model = require("./pg/locationsModel.cjs");
 const appointments_model = require("./pg/appointmentsModel.cjs");
 const ticket_model = require("./pg/ticketModel.cjs");
+const services_model = require("./pg/servicesModel.cjs")
 
 const app = express();
 const port = 3001;
@@ -35,7 +36,7 @@ app.use(function (req, res, next) {
 const RateLimit = require('express-rate-limit');
 const limiter = RateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 500,
 })
 
 app.use(limiter);
@@ -59,6 +60,47 @@ function generateToken(id){
 //network testing
 app.get('/', (req, res) => {
   res.send(`Connected successfully to port ${port}`);
+})
+
+/* STATISTICS */
+
+app.get(`${path}/stats/users`, (req, res) => {
+  users_model.statistics()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+app.get(`${path}/stats/appointments`, (req, res) => {
+  appointments_model.statistics()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+app.get(`${path}/stats/tickets`, (req, res) => {
+  ticket_model.statistics()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
+/* SERVICES */
+app.get(`${path}/services`, (req, res) => {
+  services_model.getServices()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
 })
 
 /* USERS */

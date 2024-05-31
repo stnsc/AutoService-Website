@@ -154,6 +154,17 @@ const getIsAdmin = async (user_id) => {
   }
 }
 
+//statistica
+const statistics = async () => {
+  return await new Promise((resolve, reject) => {
+    pool.query(`SELECT max(user_id) FROM users`, (error, results) => {
+      if(error) reject(error);
+      if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+      else reject(new Error("Nu s-au putut lua statisticele."))
+    })
+  })
+}
+
 module.exports = {
   createUser,
   loginUser,
@@ -162,5 +173,6 @@ module.exports = {
   setUsername,
   setEmail,
   setPassword,
-  getIsAdmin
+  getIsAdmin,
+  statistics
 };

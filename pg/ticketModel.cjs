@@ -105,11 +105,23 @@ const getChatsFromTicket = (body) => {
   })
 }
 
+//statistica
+const statistics = async () => {
+  return await new Promise((resolve, reject) => {
+    pool.query(`SELECT max(ticket_id) FROM ticketrepository`, (error, results) => {
+      if(error) reject(error);
+      if(results && results.rows && results.rows.length > 0) resolve(results.rows[0]);
+      else reject(new Error("Nu s-au putut lua statisticele."))
+    })
+  })
+}
+
 module.exports = {
   createTicket,
   getTicketUser,
   getAllTickets,
   claimTicket,
   addChat,
-  getChatsFromTicket
+  getChatsFromTicket,
+  statistics
 }
