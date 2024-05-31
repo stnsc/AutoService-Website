@@ -7,7 +7,7 @@
 require('dotenv').config();
 
 const express = require("express");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const users_model = require("./pg/usersModel.cjs");
 const locations_model = require("./pg/locationsModel.cjs");
@@ -29,6 +29,16 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+//functionalitate pentru a limita numarul de pachete pentru fiecare utilizator
+//se realizeaza acest lucru pentru a combate atacurile "Denial-Of-Service", supranumite DDOS
+const RateLimit = require('express-rate-limit');
+const limiter = RateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+})
+
+app.use(limiter);
 
 /* SESSION TOKEN */
 
