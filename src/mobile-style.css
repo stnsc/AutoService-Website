@@ -95,4 +95,13 @@
             flex: 1 calc(100%);
         }
     }
+
+    .location-container{
+        flex-direction: column;
+
+        .card{
+            width: 80%;
+            flex-direction: column;
+        }
+    }
 }

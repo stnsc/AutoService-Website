@@ -138,33 +138,42 @@ export default function LocatiiPage() {
                 <div className="location-body">
                   <h1 className="location-name">{name}</h1>
                   <p className="location-desc">
-                    {description} {<br />} {address} {<br />} {coords}
+                    {description} {<br />} {address}
                   </p>
-                  {
-                    //buton pentru a deschide un pop-up cu detalii aditionale pentru
-                    //programare daca utilizatorul este logat
-                    logged && (
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="location-button btn btn-primary"
-                        onClick={() => {
-                          setModalOpen(true);
-                          setData([name, location_id]);
-                        }}
-                      >
-                        Înregistrează-te!
-                      </motion.button>
-                    )
-                  }
-                  {!logged && (
-                    <button
-                      disabled
-                      className="location-button btn btn-primary"
+                  <div className="button-layout">
+                    <a
+                      href={"https://www.google.com/maps/place/" + coords}
+                      target="_blank"
+                      className="btn btn-secondary"
                     >
-                      Loghează-te pentru a continua
-                    </button>
-                  )}
+                      Vezi pe Google Maps
+                    </a>
+                    {
+                      //buton pentru a deschide un pop-up cu detalii aditionale pentru
+                      //programare daca utilizatorul este logat
+                      logged && (
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="location-button btn btn-primary"
+                          onClick={() => {
+                            setModalOpen(true);
+                            setData([name, location_id]);
+                          }}
+                        >
+                          Înregistrează-te!
+                        </motion.button>
+                      )
+                    }
+                    {!logged && (
+                      <button
+                        disabled
+                        className="location-button btn btn-primary"
+                      >
+                        Loghează-te pentru a continua
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ),
@@ -190,7 +199,6 @@ export default function LocatiiPage() {
                 value={(dateTime || "").toString()}
                 onChange={handleDateChange}
               />
-              <p>{dateTime}</p>
             </div>
             <div className="schedule-section">
               <h4>Detalii adiționale:</h4>

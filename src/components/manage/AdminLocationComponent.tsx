@@ -109,7 +109,7 @@ export default function AdminLocationComponent() {
             <>
               <div className="card" key={location_id}>
                 <img
-                  className="location-image"
+                  className="card-img-top"
                   alt=""
                   style={{ backgroundImage: "url(" + image + ")" }}
                 />
@@ -119,17 +119,25 @@ export default function AdminLocationComponent() {
                   <p className="location-desc">
                     {description} {<br />} {address} {<br />} {coords}
                   </p>
+                  <div className="button-layout">
+                    <a
+                      href={"https://www.google.com/maps/place/" + coords}
+                      target="_blank"
+                      className="btn btn-secondary"
+                    >
+                      Vezi pe Google Maps
+                    </a>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => {
+                        setLocationData([location_id, name]);
+                        setDeleteModalOpen(true);
+                      }}
+                    >
+                      Șterge Locația
+                    </button>
+                  </div>
                 </div>
-
-                <button
-                  className="btn btn-danger"
-                  onClick={() => {
-                    setLocationData([location_id, name]);
-                    setDeleteModalOpen(true);
-                  }}
-                >
-                  Șterge Locația
-                </button>
               </div>
             </>
           ),
