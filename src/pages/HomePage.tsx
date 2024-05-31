@@ -58,7 +58,7 @@ export default function HomePage() {
 
       {/* SERVICES COMPONENT */}
 
-      <h2 className="home-subtitle">Cateva servicii pe care le oferim:</h2>
+      <h2 className="home-subtitle">Câteva servicii pe care le oferim:</h2>
 
       <div className="services-div">
         <motion.div

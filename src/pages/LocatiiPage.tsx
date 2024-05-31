@@ -115,7 +115,12 @@ export default function LocatiiPage() {
 
   return (
     <>
-      <HeroTitle title={"Locatii"} description={"Descriere Pagina Locatii"} />
+      <HeroTitle
+        title={"Locații"}
+        description={
+          "Aici puteți vedea toate locațiile înregistrate în baza noastră de date.\nPentru a vă programa, trebuie să fiți înregistrați."
+        }
+      />
 
       <div className="location-container">
         {
