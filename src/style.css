@@ -165,12 +165,13 @@ body {
 
 .location-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     margin: 2em;
 
     .card{
+        flex: 1 1 calc(50%);
         display: flex;
         flex-direction: row;
         width: 70vh;
