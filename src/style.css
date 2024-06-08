@@ -695,5 +695,20 @@ body {
     }
 }
 
+.backhome-center{
+    display: flex;
+    justify-content: center;
+
+    .backhome-div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(0,0,0,0.3);
+        margin: 2em;
+        padding: 2em;
+        border-radius: 1em;
+    }
+}
+
 
 

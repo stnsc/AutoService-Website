@@ -25,9 +25,12 @@ export default function LocatiiPage() {
 
   //variabile initializate
   const [locations, setLocations] = useState([]);
-  const [data, setData] = useState([]);
+
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const [data, setData] = useState([]);
   const [logged, isLogged] = useState(false);
+
   const [dateTime, setDateTime] = useState("");
   const [details, setDetails] = useState("");
   const [userID, setUserID] = useState("");

@@ -8,9 +8,15 @@ export default function NotFoundPage() {
   return (
     <>
       <HeroTitle title={"404"} description={"Pagina nu a fost gasită"} />
-      <Link to="/" className="btn btn-primary">
-        Înapoi acasa
-      </Link>
+      <div className="backhome-center">
+        <div className="backhome-div">
+          <h2>Pentru a te întoarce înapoi acasă...</h2>
+          <Link to="/" className="btn btn-primary">
+            Apasă aici!
+          </Link>
+        </div>
+      </div>
+
       <motion.div
         className="screen-wipe"
         initial={{ scaleX: 1 }}
