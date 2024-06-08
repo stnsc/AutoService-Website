@@ -16,6 +16,10 @@ export default function Navbar() {
   const [user, setUser] = useState("");
   const [isActive, setActive] = useState("Acasa");
 
+  const title_append = "AutoService | ";
+
+  const [title, setTitle] = useState("Acasa");
+
   //clase active si inactive pentru afisarea dinamica a paginii curente
   const inactiveClass = "nav-link px-2";
   const activeClass = inactiveClass + " nav-selected";
@@ -102,12 +106,17 @@ export default function Navbar() {
     setActivePage();
   }, [setActivePage]);
 
+  useEffect(() => {
+    document.title = title_append + title;
+  }, [title]);
+
   return (
     <nav className="navbar navbar-expand-md fixed-top bg-body">
       <div className="container-fluid">
         <a
           className="navbar-brand"
           onClick={() => {
+            setTitle("Acasa");
             navigate("/");
           }}
         >
@@ -135,7 +144,10 @@ export default function Navbar() {
             <Link
               to="/"
               className={`${isActive === "/" ? activeClass : inactiveClass}`}
-              onClick={setActivePage}
+              onClick={() => {
+                setTitle("Acasa");
+                setActivePage();
+              }}
             >
               Acasă
             </Link>
@@ -143,7 +155,10 @@ export default function Navbar() {
             <Link
               to="/servicii"
               className={`${isActive === "/servicii" ? activeClass : inactiveClass}`}
-              onClick={setActivePage}
+              onClick={() => {
+                setTitle("Servicii");
+                setActivePage();
+              }}
             >
               Servicii
             </Link>
@@ -151,7 +166,10 @@ export default function Navbar() {
             <Link
               to="/locatii"
               className={`${isActive === "/locatii" ? activeClass : inactiveClass}`}
-              onClick={setActivePage}
+              onClick={() => {
+                setTitle("Locatii");
+                setActivePage();
+              }}
             >
               Locații
             </Link>
@@ -159,7 +177,10 @@ export default function Navbar() {
             <Link
               to="/contact"
               className={`${isActive === "/contact" ? activeClass : inactiveClass}`}
-              onClick={setActivePage}
+              onClick={() => {
+                setTitle("Contact");
+                setActivePage();
+              }}
             >
               Contact
             </Link>
@@ -179,7 +200,10 @@ export default function Navbar() {
                 <Link
                   to="/manage"
                   className={`${isActive === "/manage" ? activeClass : inactiveClass} manage-div`}
-                  onClick={setActivePage}
+                  onClick={() => {
+                    setTitle("Gestiune Cont");
+                    setActivePage();
+                  }}
                 >
                   Detalii cont
                 </Link>
@@ -196,7 +220,10 @@ export default function Navbar() {
             <Link
               to="/login"
               className={`${user ? "d-none" : ""} m-1 p-3 ${isActive === "/login" ? activeClass : inactiveClass}`}
-              onClick={setActivePage}
+              onClick={() => {
+                setTitle("Autentificare");
+                setActivePage();
+              }}
             >
               Login
             </Link>
