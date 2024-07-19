@@ -26,7 +26,7 @@ export default function Navbar() {
 
   useEffect(() => {
     //se verifica daca exista cookie-uri in stocarea locala a utilizatorului
-    //daca nu se gaseste nimic dintre cele trei variabile, utilizatoul este deconectat
+    //daca nu se gaseste nimic dintre cele trei variabile, utilizatorul este deconectat
     const token: string = localStorage.getItem("token") as string;
     const name: string = localStorage.getItem("name") as string;
     const user_id: string = localStorage.getItem("user_id") as string;

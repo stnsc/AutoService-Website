@@ -9,7 +9,9 @@
 import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark",
+  );
 
   function handleChange(e: {
     target: { checked: boolean | ((prevState: boolean) => boolean) };
@@ -20,8 +22,10 @@ export default function Footer() {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.setAttribute("data-bs-theme", "dark");
+      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.setAttribute("data-bs-theme", "light");
+      localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
 
